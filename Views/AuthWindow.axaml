@@ -1,0 +1,57 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
+		x:Class="Pelmenara_AUI_RUI.Views.AuthWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Authorization" MinHeight="400" MinWidth="400" Height="400" Width="400"
+		Background="Goldenrod"
+		x:Name="Auth">
+	<Design.DataContext>
+		<vm:AuthVM/>
+	</Design.DataContext>
+	<Grid>
+		<TextBlock
+			Text="Авторизация"  Foreground="LightGoldenrodYellow"
+			TextAlignment="Center" FontFamily="ArialNova"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			FontSize="40" Margin="0,30,0,0" />
+		<TextBox 
+			Watermark="Введите Логин"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			FontSize="14" FontFamily="ArialNova"
+			Text="{Binding Login}" 
+			Padding="7 5 0 0"
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" 
+			Margin="0,135,0,0" />
+		<TextBox
+			Watermark="Введите Пароль"
+			x:Name="PasswordBox" PasswordChar="●"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			FontSize="14" FontFamily="ArialNova"
+			Text="{Binding Password}" 
+			Padding="7 5 0 0"
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" 
+			Margin="0,185,0,0" />
+		<Button
+			Command="{Binding SignInCommand}"
+			CommandParameter="{Binding ElementName=Auth}"
+			Content="Войти" 
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			FontSize="16" FontFamily="ArialNova"
+			Name="btn_Auth" Background="LightGoldenrodYellow"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Height="40" Width="152" Cursor="Hand" Margin="0,265,0,0" />
+		<Button
+			Command="{Binding SignUpCommand}"
+			CommandParameter="{Binding ElementName=Auth}"
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Content="Регистрация"
+			FontSize="12" FontFamily="ArialNova"
+			Name="btn_Reg" Background="LightGoldenrodYellow"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Height="30" Width="100" Cursor="Hand" Margin="0,320,0,0" />
+	</Grid>
+</Window>

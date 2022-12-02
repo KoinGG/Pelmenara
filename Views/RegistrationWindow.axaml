@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+		x:Class="Pelmenara_AUI_RUI.Views.RegistrationWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Registration" MinHeight="500" MinWidth="400" Height="500" Width="400"
+		Background="Goldenrod"
+		x:Name="Registration">
+    <Window.DataContext>
+        <vm:RegistrationVM/>
+    </Window.DataContext>
+	<Grid x:Name="RegistrationGrid">
+		<TextBlock
+			Text="Регистрация"  Foreground="LightGoldenrodYellow"
+			TextAlignment="Center"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			FontSize="40" Margin="0,30,0,0" />
+		<!--Text="{Binding User.Login}"-->
+		<TextBox
+			x:Name="LoginBox" 
+			Watermark="Укажите Логин"
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam"
+			FontSize="14" Padding="7 5 0 0"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Margin="0,135,0,0" />
+		<!--Text="{Binding User.Password}"-->
+		<TextBox
+			x:Name="PasswordBox1" PasswordChar="●"
+			Watermark="Укажите Пароль"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			FontSize="14" Padding="7 5 0 0"
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,180,0,0" />
+		<!--Text="{Binding User.Password}"-->
+		<TextBox
+			x:Name="PasswordBox2" PasswordChar="●"
+			Watermark="Подтвердите Пароль"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			FontSize="14" Padding="7 5 0 0"
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,225,0,0" />
+		<!--Text="{Binding User.Email}"-->
+		<TextBox
+			x:Name="EmailBox" 
+			Watermark="Укажите E-mail"
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam"
+			FontSize="14" Padding="7 5 0 0"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Margin="0,270,0,0" />
+		<Button			
+			Content="Подтвердить"
+			Command="{Binding SignUpAcceptCommand}"
+			CommandParameter="{Binding ElementName=Registration}" 
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			FontSize="16"
+			Name="btn_regAccept" Background="LightGoldenrodYellow"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Height="40" Width="152" Cursor="Hand" Margin="0,375,0,0" />
+		<Button
+			Content="Войти"
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Command="{Binding SignInCommand}"
+			FontSize="12"
+			CommandParameter="{Binding ElementName=Registration}"
+			Name="btn_Reg" Background="LightGoldenrodYellow"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Height="30" Width="90" Cursor="Hand" Margin="0,425,0,0" />
+	</Grid>
+</Window>

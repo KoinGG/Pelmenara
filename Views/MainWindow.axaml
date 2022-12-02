@@ -1,0 +1,83 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+		d:DesignWidth="550" d:DesignHeight="600"
+		Width="550" Height="600"
+        x:Class="Pelmenara_AUI_RUI.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Pelmenara_AUI_RUI"
+		Background="Goldenrod">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <!--<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="450"/>
+			<ColumnDefinition Width="100*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<StackPanel Grid.Column="0" Grid.Row="0" Margin="25,10,0,0">
+			<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="00"/>
+		</StackPanel>
+		
+		<StackPanel Grid.Column="1" Grid.Row="0" Margin="0,10,25,0">
+			<!--<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="10"/>-->
+			<Button Content="Вход" Command="{Binding SignInCommand}"
+					VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+					Width="52" Height="30"					
+					VerticalAlignment="Top" HorizontalAlignment="Right"
+					Margin="0,0,0,0" Cursor="Arrow"/>
+		</StackPanel>
+		
+		<StackPanel Grid.Column="0" Grid.Row="1" Margin="25,0,0,0">
+			<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="01"/>
+		</StackPanel>
+		
+		<StackPanel Grid.Column="1" Grid.Row="1" Margin="0,0,25,0">
+			<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="11"/>
+		</StackPanel>
+		
+		<!--<ListBox>
+			<ListBoxItem>
+				<ContentControl>
+					<ContentControl.ContentTemplate>
+						<TextBlock Text="абоба"/>
+						<TextBlock Text="бебра"/>
+						<TextBox Text=""/>
+					</ContentControl.ContentTemplate>
+				</ContentControl>
+			</ListBoxItem>
+		</ListBox>-->
+
+		<!--<ListBox>
+			<ListBoxItem>
+				<StackPanel>
+					<TextBlock Text="абоба"/>
+					<TextBlock Text="бебра"/>
+					<TextBox Text=""/>
+				</StackPanel>
+			</ListBoxItem>
+		</ListBox>-->
+
+	</Grid>
+	
+</Window>
