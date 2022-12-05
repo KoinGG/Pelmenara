@@ -8,6 +8,7 @@ namespace Pelmenara_AUI_RUI
 {
     public partial class App : Application
     {
+        public string dbpass = "youtubesuperlol";
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

@@ -8,9 +8,12 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
+    <None Remove="Fonts\MultiroundPro.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\MultiroundPro.ttf" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.

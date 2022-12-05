@@ -9,6 +9,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using MessageBox.Avalonia.Enums;
+using Pelmenara_AUI_RUI.Sourses;
 
 namespace Pelmenara_AUI_RUI.ViewModels
 {
@@ -18,6 +19,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private string _password;
         public ReactiveCommand<Window, Unit> SignInAcceptCommand { get; }
         public ReactiveCommand<Window, Unit> SignUpCommand { get; }
+        //public static int UserID;
 
         public string Login
         {
@@ -36,11 +38,10 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         private void SignInAcceptCommandImpl(Window window)
         {
-            // заглушка (пока нет БД)
-            if(Login == "123" && Password == "456")
+            var user = Helper.GetContext().Users.FirstOrDefault(x => x.Login == Login && x.Password == Password);
+            if(user != null )
             {
-                MainWindow mainWindow= new MainWindow();
-                mainWindow.Show();
+                MainWindowViewModel.User = user;
                 window.Close();
             }
             else
@@ -48,11 +49,12 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 MessageBoxManager.GetMessageBoxStandardWindow("Пользователь устранён", "ашибка ашибка", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
             }
         }
-        private void SignUpCommandImpl(Window window)
+        private async void SignUpCommandImpl(Window window)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();
-            registrationWindow.Show();
-            window.Close();
+            //window.Hide();
+            await registrationWindow.ShowDialog(window).WaitAsync(TimeSpan.FromMinutes(60));
+            //window.Show();
         }
         public AuthVM()
         {
