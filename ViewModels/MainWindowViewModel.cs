@@ -63,26 +63,25 @@ namespace Pelmenara_AUI_RUI.ViewModels
             }
             finally
             {
-                IsUserAuthorisedChangesImpl(window as MainWindow);
+                IfUserAuthorisedChangesImpl(window as MainWindow);
             }
         }
 
-        private void IsUserAuthorisedChangesImpl(MainWindow window)
+        private void IfUserAuthorisedChangesImpl(MainWindow window)
         {
             if(User.UserId != 0)
             {
                 Text00 = "0000";
                 Text01 = "0101";
                 Text11 = "1111";
+                window.Title = $"Pelmenara: {User.Login}";
+                window.btn_SignIn.IsEnabled = false;
             }
-            window.Title = $"Pelmenara: {User.Login}";
-            window.btn_SignIn.IsEnabled = false;
         }
 
         public MainWindowViewModel()
         {
             SignInCommand = ReactiveCommand.Create<Window>(SignInCommandImpl);
-            //IsUserAuthorisedChanges = ReactiveCommand.Create(IsUserAuthorisedChangesImpl);
         }
     }
 }

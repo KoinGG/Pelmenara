@@ -45,7 +45,7 @@
 					VerticalContentAlignment="Center" 
 					HorizontalContentAlignment="Center"
 					Width="52" Height="30"
-					x:Name="btn_SignIn" x:FieldModifier="public"
+					x:Name="btn_SignIn"
 					IsEnabled="True"
 					Foreground="#000000" Background="#7851a9"
 					VerticalAlignment="Top" HorizontalAlignment="Right"

@@ -16,7 +16,8 @@ namespace Pelmenara_AUI_RUI.ViewModels
     public class RegistrationVM : ViewModelBase
     {
         public ReactiveCommand<Window, Unit> SignUpAcceptCommand { get; }
-        public ReactiveCommand<Window, Unit> SignInCommand { get; }
+        //public ReactiveCommand<Window, Unit> SignInCommand { get; }
+        public ReactiveCommand<Window, Unit> CancelCommand { get; }
 
         private User _user = new User();
         private string _password;
@@ -28,12 +29,13 @@ namespace Pelmenara_AUI_RUI.ViewModels
             {
                 if(User.Password != Password)
                 {
-                    MessageBoxManager.GetMessageBoxStandardWindow("Пароли не совпадают", "ашибка ашибка", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                    MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пароли не совпадают", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
                     return;
                 }
                 else if(Helper.GetContext().Users.FirstOrDefault(x => x.Login == User.Login || x.Email == User.Email) != null)
                 {
-                    MessageBoxManager.GetMessageBoxStandardWindow("Пользователь с таким Login или Email уже существует", "ашибка ашибка", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                    MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пользователь с таким Login или Email уже существует", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                    return;
                 }
 
                 try
@@ -43,22 +45,26 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 }
                 catch
                 {
-                    MessageBoxManager.GetMessageBoxStandardWindow("Не удалось создать пользователя", "ашибка ашибка", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                    MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось создать пользователя", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                    return;
                 }
 
-                AuthWindow authWindow = new AuthWindow();
-                authWindow.Show();
                 window.Close();
             }
             else
             {
-                MessageBoxManager.GetMessageBoxStandardWindow("Не заполнены все поля", "ашибка ашибка", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не заполнены все поля", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
             }
         }
-        private void SignInCommandImpl(Window window)
+        //private void SignInCommandImpl(Window window)
+        //{
+        //    AuthWindow authWindow = new AuthWindow();
+        //    authWindow.Show();
+        //    window.Close();
+        //}
+
+        private void CancelCommandImpl(Window window)
         {
-            AuthWindow authWindow = new AuthWindow();
-            authWindow.Show();
             window.Close();
         }
 
@@ -78,7 +84,8 @@ namespace Pelmenara_AUI_RUI.ViewModels
         public RegistrationVM()
         {
             SignUpAcceptCommand = ReactiveCommand.Create<Window>(SignUpAcceptCommandImpl);
-            SignInCommand = ReactiveCommand.Create<Window>(SignInCommandImpl);
+            CancelCommand = ReactiveCommand.Create<Window>(CancelCommandImpl);
+            //SignInCommand = ReactiveCommand.Create<Window>(SignInCommandImpl);
         }
     }
 }

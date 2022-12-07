@@ -61,11 +61,20 @@
 			FontSize="16" Name="btn_regAccept"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			Height="40" Width="152" Cursor="Hand" Margin="0,375,0,0" />
-		<Button
+		<!--<Button
 			Content="Войти"
 			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 			Command="{Binding SignInCommand}"
 			Foreground="#000000" Background="#7851a9" 
+			FontSize="12" Name="btn_Reg"
+			CommandParameter="{Binding ElementName=Registration}"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			Height="30" Width="90" Cursor="Hand" Margin="0,425,0,0" />-->
+		<Button
+			Content="Отмена"
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Command="{Binding CancelCommand}"
+			Foreground="#000000" Background="#7851a9"
 			FontSize="12" Name="btn_Reg"
 			CommandParameter="{Binding ElementName=Registration}"
 			HorizontalAlignment="Center" VerticalAlignment="Top"

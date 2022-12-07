@@ -46,7 +46,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
             }
             else
             {
-                MessageBoxManager.GetMessageBoxStandardWindow("Пользователь устранён", "ашибка ашибка", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Пользователь устранён", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
             }
         }
         private async void SignUpCommandImpl(Window window)
