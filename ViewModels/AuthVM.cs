@@ -58,6 +58,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
         }
         public AuthVM()
         {
+            //Helper.GetContext();
             SignInAcceptCommand = ReactiveCommand.Create<Window>(SignInAcceptCommandImpl);
             SignUpCommand = ReactiveCommand.Create<Window>(SignUpCommandImpl);
         }

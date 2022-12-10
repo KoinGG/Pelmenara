@@ -83,6 +83,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         public RegistrationVM()
         {
+            //Helper.GetContext();
             SignUpAcceptCommand = ReactiveCommand.Create<Window>(SignUpAcceptCommandImpl);
             CancelCommand = ReactiveCommand.Create<Window>(CancelCommandImpl);
             //SignInCommand = ReactiveCommand.Create<Window>(SignInCommandImpl);

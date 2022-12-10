@@ -46,10 +46,21 @@
 					HorizontalContentAlignment="Center"
 					Width="52" Height="30"
 					x:Name="btn_SignIn"
-					IsEnabled="True"
+					IsEnabled="True" IsVisible="True"
 					Foreground="#000000" Background="#7851a9"
 					VerticalAlignment="Top" HorizontalAlignment="Right"
 					Margin="0,0,0,0" Cursor="Arrow"/>
+			<Button Content="Выход" 
+			        Command="{Binding SignOutCommand}"
+			        CommandParameter="{Binding ElementName=thisWindow}"
+			        VerticalContentAlignment="Center" 
+			        HorizontalContentAlignment="Center"
+			        Width="52" Height="30"
+			        x:Name="btn_SignOut"
+			        IsEnabled="False" IsVisible="False"
+			        Foreground="#000000" Background="#7851a9"
+			        VerticalAlignment="Top" HorizontalAlignment="Right"
+			        Margin="0,0,0,0" Cursor="Arrow"/>
 		</StackPanel>
 		
 		<StackPanel Grid.Column="0" Grid.Row="1" Margin="25,0,0,0">

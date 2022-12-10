@@ -20,6 +20,7 @@
 			FontSize="40" Margin="0,30,0,0" />
 		<TextBox
 			x:Name="LoginBox" 
+			
 			Watermark="Укажите Логин"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam"
 			FontSize="14" Padding="7 5 0 0"
