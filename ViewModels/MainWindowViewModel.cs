@@ -22,8 +22,12 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private string? _text01 = "01";
         private string? _text11 = "11";
         public static User User { get; set; } = new User();
+<<<<<<< Updated upstream
         public ReactiveCommand<Window, Unit> SignInCommand { get; }
         public ReactiveCommand<Window, Unit> SignOutCommand { get; }
+=======
+        public ReactiveCommand<MainWindow, Unit> SignInCommand { get; }
+>>>>>>> Stashed changes
         public ReactiveCommand<Unit, Unit> IsUserAuthorisedChanges { get; }
         //public ReactiveCommand<Unit, Unit> Abort { get; }
 
@@ -53,7 +57,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
         }
 
 
-        private async void SignInCommandImpl(Window window)
+        private async void SignInCommandImpl(MainWindow window)
         {
             AuthWindow authWindow = new AuthWindow();
             try
@@ -62,12 +66,16 @@ namespace Pelmenara_AUI_RUI.ViewModels
             }
             catch
             {
+<<<<<<< Updated upstream
                 MessageBoxManager.GetMessageBoxStandardWindow("ÐžÑˆÐ¸Ð±ÐžÑ‡ÐºÐ°", "Ð’Ñ€ÐµÐ¼Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¸ÑÑ‚ÐµÐºÐ»Ð¾", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+=======
+                MessageBoxManager.GetMessageBoxStandardWindow("ÎøèáÎ÷êà", "Âðåìÿ àâòîðèçàöèè èñòåêëî", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+>>>>>>> Stashed changes
                 authWindow.Close();
             }
             finally
             {
-                IfUserAuthorisedChangesImpl(window as MainWindow);
+                IfUserAuthorisedChangesImpl(window);
             }
         }
 
@@ -103,9 +111,13 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         public MainWindowViewModel()
         {
+<<<<<<< Updated upstream
             //Helper.GetContext();
             SignInCommand = ReactiveCommand.Create<Window>(SignInCommandImpl);
             SignOutCommand = ReactiveCommand.Create<Window>(SignOutCommandImpl);
+=======
+            SignInCommand = ReactiveCommand.Create<MainWindow>(SignInCommandImpl);
+>>>>>>> Stashed changes
         }
     }
 }

@@ -8,7 +8,7 @@
 		Width="550" Height="600"
         x:Class="Pelmenara_AUI_RUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Pelmenara_AUI_RUI"
+        Title="Pelmenara"
 		Background="#e6e6fa"
 		x:Name="thisWindow">
 

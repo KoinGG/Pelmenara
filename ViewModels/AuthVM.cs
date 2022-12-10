@@ -39,7 +39,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private void SignInAcceptCommandImpl(Window window)
         {
             var user = Helper.GetContext().Users.FirstOrDefault(x => x.Login == Login && x.Password == Password);
-            if(user != null )
+            if(user != null)
             {
                 MainWindowViewModel.User = user;
                 window.Close();
