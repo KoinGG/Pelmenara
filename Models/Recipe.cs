@@ -17,7 +17,7 @@ public partial class Recipe
 
     public string CookingTime { get; set; } = null!;
 
-    public DateOnly CreationDate { get; set; }
+    public DateTime CreationDate { get; set; }
 
     public int OwnerId { get; set; }
 

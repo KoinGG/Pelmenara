@@ -22,7 +22,7 @@ namespace Pelmenara_AUI_RUI
                 desktop.MainWindow = new MainWindow
                 {
                     //DataContext = new MainWindowViewModel(),
-                    DataContext = new MainWindowViewModel(),
+                    //DataContext = new MainWindowViewModel(),
                 };
             }
 

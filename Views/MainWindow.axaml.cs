@@ -8,7 +8,7 @@ namespace Pelmenara_AUI_RUI.Views
     {
         public MainWindow()
         {
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(this);
             InitializeComponent();
         }
     }

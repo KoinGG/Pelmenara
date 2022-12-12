@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
+using System.Collections.ObjectModel;
 
 namespace Pelmenara_AUI_RUI.ViewModels
 {
@@ -22,12 +23,25 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private string? _text01 = "01";
         private string? _text11 = "11";
 
+        private MainWindow mainWindow; 
         public static User User { get; set; } = new User();
         public ReactiveCommand<MainWindow, Unit> SignInCommand { get; }
         public ReactiveCommand<MainWindow, Unit> SignOutCommand { get; }
         public ReactiveCommand<MainWindow, Unit> AddRecipeCommand { get; }
         public ReactiveCommand<Unit, Unit> IsUserAuthorisedChanges { get; }
-        //public ReactiveCommand<MainWindow, Unit> SomeCommand { get; }
+        public ReactiveCommand<MainWindow, Unit> SomeCommand { get; }
+
+        private ObservableCollection<Recipe> _recipes;
+
+        public ObservableCollection<Recipe> Recipes
+        {
+            get { return _recipes; }
+            set 
+            {
+                this.RaiseAndSetIfChanged(ref _recipes, value);
+            }
+        }
+
 
         public string? Text00
         {
@@ -115,21 +129,37 @@ namespace Pelmenara_AUI_RUI.ViewModels
             
         }
 
+        private Recipe _recipe;
+
+        public Recipe SelectedRecipe
+        {
+            get { return _recipe; }
+            set 
+            {
+                this.RaiseAndSetIfChanged(ref _recipe, value);
+                SomeCommandImpl(mainWindow);
+            }
+        }
+
+
         private void AddRecipeCommandImpl(MainWindow window)
         {
 
         }
 
-        //private void SomeCommandImpl(MainWindow window)
-        //{
-        //    Text00 = "000000";
-        //    Text01 = "010101";
-        //    Text11 = "111111";
-        //}
-
-        public MainWindowViewModel()
+        private void SomeCommandImpl(MainWindow window)
         {
-            //SomeCommand = ReactiveCommand.Create<MainWindow>(SomeCommandImpl);
+            Text00 = "000000";
+            Text01 = "010101";
+            Text11 = "111111";
+        }
+
+        public MainWindowViewModel(MainWindow window)
+        {
+            mainWindow = window;
+            Recipes = new ObservableCollection<Recipe>(Helper.GetContext().Recipes);
+
+            SomeCommand = ReactiveCommand.Create<MainWindow>(SomeCommandImpl);
             SignInCommand = ReactiveCommand.Create<MainWindow>(SignInCommandImpl);
             SignOutCommand = ReactiveCommand.Create<MainWindow>(SignOutCommandImpl);
             AddRecipeCommand = ReactiveCommand.Create<MainWindow>(AddRecipeCommandImpl);

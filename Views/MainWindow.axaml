@@ -78,13 +78,11 @@
 					Grid.Column="0" Grid.Row="1"
 					Margin="10,5,5,5">
 
-			<!--<ListBox Background="Azure">
-				<TextBlock Text="Абоба" >
-					<TextBlock.InputBindings>
-						<KeyBinding Command="{Binding SomeCommand}" Gesture="Alt"/>
-					</TextBlock.InputBindings>
-				</TextBlock>
-			</ListBox>-->
+			<ListBox Background="Azure"
+					 SelectedItem="{Binding SelectedRecipe}"
+					 Items="{Binding Recipes}">
+				
+			</ListBox>
 			
 			<TextBlock 
 				HorizontalAlignment="Center"
