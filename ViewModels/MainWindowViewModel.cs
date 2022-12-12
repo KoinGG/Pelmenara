@@ -21,15 +21,13 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private string? _text00 = "00";
         private string? _text01 = "01";
         private string? _text11 = "11";
+
         public static User User { get; set; } = new User();
-<<<<<<< Updated upstream
-        public ReactiveCommand<Window, Unit> SignInCommand { get; }
-        public ReactiveCommand<Window, Unit> SignOutCommand { get; }
-=======
         public ReactiveCommand<MainWindow, Unit> SignInCommand { get; }
->>>>>>> Stashed changes
+        public ReactiveCommand<MainWindow, Unit> SignOutCommand { get; }
+        public ReactiveCommand<MainWindow, Unit> AddRecipeCommand { get; }
         public ReactiveCommand<Unit, Unit> IsUserAuthorisedChanges { get; }
-        //public ReactiveCommand<Unit, Unit> Abort { get; }
+        //public ReactiveCommand<MainWindow, Unit> SomeCommand { get; }
 
         public string? Text00
         {
@@ -66,11 +64,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
             }
             catch
             {
-<<<<<<< Updated upstream
-                MessageBoxManager.GetMessageBoxStandardWindow("ÐžÑˆÐ¸Ð±ÐžÑ‡ÐºÐ°", "Ð’Ñ€ÐµÐ¼Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¸ÑÑ‚ÐµÐºÐ»Ð¾", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-=======
                 MessageBoxManager.GetMessageBoxStandardWindow("ÎøèáÎ÷êà", "Âðåìÿ àâòîðèçàöèè èñòåêëî", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
->>>>>>> Stashed changes
                 authWindow.Close();
             }
             finally
@@ -78,46 +72,67 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 IfUserAuthorisedChangesImpl(window);
             }
         }
-
-        private void SignOutCommandImpl(Window window)
-        {
-            if (User.UserId != 0)
-            {
-                User.UserId = -1;
-                Text00 = "00";
-                Text01 = "01";
-                Text11 = "11";
-                (window as MainWindow).btn_SignIn.IsEnabled = true;
-                (window as MainWindow).btn_SignIn.IsVisible = true;
-                (window as MainWindow).btn_SignOut.IsEnabled = false;
-                (window as MainWindow).btn_SignOut.IsVisible = false;
-            }
-            
-        }
         private void IfUserAuthorisedChangesImpl(MainWindow window)
         {
-            if(User.UserId != 0)
+            if (User.UserId != 0)
             {
                 Text00 = "0000";
                 Text01 = "0101";
                 Text11 = "1111";
                 window.Title = $"Pelmenara: {User.Login}";
+
                 window.btn_SignIn.IsEnabled = false;
                 window.btn_SignIn.IsVisible = false;
+
                 window.btn_SignOut.IsEnabled = true;
                 window.btn_SignOut.IsVisible = true;
+
+                window.btn_AddRecipe.IsEnabled = true;
+                window.btn_AddRecipe.IsVisible = true;
+
+                window.btn_ChangeRecipe.IsEnabled = true;
+                window.btn_ChangeRecipe.IsVisible = true;
+
+                window.btn_DeleteRecipe.IsEnabled = true;
+                window.btn_DeleteRecipe.IsVisible = true;
             }
         }
 
+        private void SignOutCommandImpl(MainWindow window)
+        {
+            if (User.UserId != 0)
+            {              
+                User.UserId = -1;
+                Text00 = "00";
+                Text01 = "01";
+                Text11 = "11";
+                window.Title = "Pelmenara";
+                window.btn_SignIn.IsEnabled = true;
+                window.btn_SignIn.IsVisible = true;
+                window.btn_SignOut.IsEnabled = false;
+                window.btn_SignOut.IsVisible = false;
+            }
+            
+        }
+
+        private void AddRecipeCommandImpl(MainWindow window)
+        {
+
+        }
+
+        //private void SomeCommandImpl(MainWindow window)
+        //{
+        //    Text00 = "000000";
+        //    Text01 = "010101";
+        //    Text11 = "111111";
+        //}
+
         public MainWindowViewModel()
         {
-<<<<<<< Updated upstream
-            //Helper.GetContext();
-            SignInCommand = ReactiveCommand.Create<Window>(SignInCommandImpl);
-            SignOutCommand = ReactiveCommand.Create<Window>(SignOutCommandImpl);
-=======
+            //SomeCommand = ReactiveCommand.Create<MainWindow>(SomeCommandImpl);
             SignInCommand = ReactiveCommand.Create<MainWindow>(SignInCommandImpl);
->>>>>>> Stashed changes
+            SignOutCommand = ReactiveCommand.Create<MainWindow>(SignOutCommandImpl);
+            AddRecipeCommand = ReactiveCommand.Create<MainWindow>(AddRecipeCommandImpl);
         }
     }
 }

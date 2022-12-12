@@ -19,14 +19,12 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private string _password;
         public ReactiveCommand<Window, Unit> SignInAcceptCommand { get; }
         public ReactiveCommand<Window, Unit> SignUpCommand { get; }
-        //public static int UserID;
 
         public string Login
         {
             get { return _login; }
             set 
-            { 
-                //_login = value;
+            {
                 this.RaiseAndSetIfChanged(ref _login, value);
             }
         }
@@ -49,16 +47,15 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Пользователь устранён", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
             }
         }
+
         private async void SignUpCommandImpl(Window window)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();
-            //window.Hide();
             await registrationWindow.ShowDialog(window).WaitAsync(TimeSpan.FromMinutes(60));
-            //window.Show();
         }
+
         public AuthVM()
         {
-            //Helper.GetContext();
             SignInAcceptCommand = ReactiveCommand.Create<Window>(SignInAcceptCommandImpl);
             SignUpCommand = ReactiveCommand.Create<Window>(SignUpCommandImpl);
         }

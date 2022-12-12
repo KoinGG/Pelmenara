@@ -6,28 +6,33 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
 		x:Class="Pelmenara_AUI_RUI.Views.RegistrationWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Registration" MinHeight="500" MinWidth="400" Height="500" Width="400"
+        Title="Registration"
+		Height="500" Width="400"
+		MinHeight="500" MinWidth="400"
+		MaxHeight="500" MaxWidth="400"
 		Background="#e6e6fa"
 		x:Name="Registration">
     <Window.DataContext>
         <vm:RegistrationVM/>
     </Window.DataContext>
 	<Grid x:Name="RegistrationGrid">
+		
 		<TextBlock
 			Text="Регистрация"  Foreground="#7851a9"
 			TextAlignment="Center"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			FontSize="40" Margin="0,30,0,0" />
+		
 		<TextBox
-			x:Name="LoginBox" 
-			
+			x:Name="LoginBox"
 			Watermark="Укажите Логин"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam"
 			FontSize="14" Padding="7 5 0 0"
 			Foreground="#000000" Background="#f8f4ff"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			Margin="0,135,0,0" 
-			Text="{Binding User.Login}"/>
+			Text="{Binding User.Login}" />
+		
 		<TextBox
 			x:Name="PasswordBox1" PasswordChar="●"
 			Watermark="Укажите Пароль"
@@ -36,6 +41,7 @@
 			Foreground="#000000" Background="#f8f4ff"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,180,0,0" 
 			Text="{Binding User.Password}" />
+		
 		<TextBox
 			x:Name="PasswordBox2" PasswordChar="●"
 			Watermark="Подтвердите Пароль"
@@ -44,6 +50,7 @@
 			Foreground="#000000" Background="#f8f4ff"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,225,0,0" 
 			Text="{Binding Password}"/>
+		
 		<TextBox
 			x:Name="EmailBox" 
 			Watermark="Укажите E-mail"
@@ -53,30 +60,23 @@
 			Foreground="#000000" Background="#f8f4ff" 
 			Margin="0,270,0,0"
 			Text="{Binding User.Email}" />
+		
 		<Button			
 			Content="Подтвердить"
 			Command="{Binding SignUpAcceptCommand}"
 			CommandParameter="{Binding ElementName=Registration}" 
 			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 			Foreground="#000000" Background="#7851a9"
-			FontSize="16" Name="btn_regAccept"
+			FontSize="16" Name="btn_SignUpAccept"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			Height="40" Width="152" Cursor="Hand" Margin="0,375,0,0" />
-		<!--<Button
-			Content="Войти"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-			Command="{Binding SignInCommand}"
-			Foreground="#000000" Background="#7851a9" 
-			FontSize="12" Name="btn_Reg"
-			CommandParameter="{Binding ElementName=Registration}"
-			HorizontalAlignment="Center" VerticalAlignment="Top"
-			Height="30" Width="90" Cursor="Hand" Margin="0,425,0,0" />-->
+		
 		<Button
 			Content="Отмена"
 			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 			Command="{Binding CancelCommand}"
 			Foreground="#000000" Background="#7851a9"
-			FontSize="12" Name="btn_Reg"
+			FontSize="12" Name="btn_Cancel"
 			CommandParameter="{Binding ElementName=Registration}"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			Height="30" Width="90" Cursor="Hand" Margin="0,425,0,0" />
