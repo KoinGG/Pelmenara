@@ -9,7 +9,7 @@ public partial class Recipe
 
     public string Title { get; set; } = null!;
 
-    public int PhotoId { get; set; }
+    //public int PhotoId { get; set; }
 
     public string Description { get; set; } = null!;
 
@@ -25,5 +25,5 @@ public partial class Recipe
 
     public virtual User Owner { get; set; } = null!;
 
-    public virtual RecipePhoto Photo { get; set; } = null!;
+    //public virtual RecipePhoto Photo { get; set; } = null!;
 }

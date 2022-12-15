@@ -19,7 +19,7 @@ public partial class PelmenaraContext : DbContext
 
     public virtual DbSet<Recipe> Recipes { get; set; }
 
-    public virtual DbSet<RecipePhoto> RecipePhotos { get; set; }
+    //public virtual DbSet<RecipePhoto> RecipePhotos { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -67,33 +67,35 @@ public partial class PelmenaraContext : DbContext
             entity.Property(e => e.Description).HasColumnType("character varying");
             entity.Property(e => e.Ingredients).HasColumnType("character varying");
             entity.Property(e => e.OwnerId).HasColumnName("OwnerID");
-            entity.Property(e => e.PhotoId).HasColumnName("PhotoID");
-            entity.Property(e => e.Title).HasMaxLength(25);
+            //entity.Property(e => e.PhotoId).HasColumnName("PhotoID");
+            entity.Property(e => e.Title).HasMaxLength(30);
+            entity.Property(e => e.Ingredients).HasMaxLength(200);
+            entity.Property(e => e.CookingTime).HasMaxLength(15);
 
             entity.HasOne(d => d.Owner).WithMany(p => p.Recipes)
                 .HasForeignKey(d => d.OwnerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Recipe_OwnerID_fkey");
 
-            entity.HasOne(d => d.Photo).WithMany(p => p.Recipes)
-                .HasForeignKey(d => d.PhotoId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Recipe_PhotoID_fkey");
+            //entity.HasOne(d => d.Photo).WithMany(p => p.Recipes)
+            //    .HasForeignKey(d => d.PhotoId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("Recipe_PhotoID_fkey");
         });
 
-        modelBuilder.Entity<RecipePhoto>(entity =>
-        {
-            entity.HasKey(e => e.RecipePhotoId).HasName("RecipePhoto_pkey");
+        //modelBuilder.Entity<RecipePhoto>(entity =>
+        //{
+        //    entity.HasKey(e => e.RecipePhotoId).HasName("RecipePhoto_pkey");
 
-            entity.ToTable("RecipePhoto");
+        //    entity.ToTable("RecipePhoto");
 
-            entity.HasIndex(e => e.PhotoPath, "RecipePhoto_PhotoPath_key").IsUnique();
+        //    entity.HasIndex(e => e.PhotoPath, "RecipePhoto_PhotoPath_key").IsUnique();
 
-            entity.Property(e => e.RecipePhotoId)
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("RecipePhotoID");
-            entity.Property(e => e.PhotoPath).HasColumnType("character varying");
-        });
+        //    entity.Property(e => e.RecipePhotoId)
+        //        .UseIdentityAlwaysColumn()
+        //        .HasColumnName("RecipePhotoID");
+        //    entity.Property(e => e.PhotoPath).HasColumnType("character varying");
+        //});
 
         modelBuilder.Entity<User>(entity =>
         {

@@ -12,57 +12,55 @@
 		MaxHeight="500" MaxWidth="400"
 		Background="#e6e6fa"
 		x:Name="Registration">
+	
     <Window.DataContext>
         <vm:RegistrationVM/>
     </Window.DataContext>
+	
 	<Grid x:Name="RegistrationGrid">
 		
 		<TextBlock
 			Text="Регистрация"  Foreground="#7851a9"
-			TextAlignment="Center"
+			TextAlignment="Center" FontWeight="Medium"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			FontSize="40" Margin="0,30,0,0" />
 		
 		<TextBox
 			x:Name="LoginBox"
-			Watermark="Укажите Логин"
+			Watermark="Укажите Логин" CornerRadius="10"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam"
-			FontSize="14" Padding="7 5 0 0"
 			Foreground="#000000" Background="#f8f4ff"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			Margin="0,135,0,0" 
 			Text="{Binding User.Login}" />
-		
+
 		<TextBox
 			x:Name="PasswordBox1" PasswordChar="●"
-			Watermark="Укажите Пароль"
+			Watermark="Укажите Пароль" CornerRadius="10"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
-			FontSize="14" Padding="7 5 0 0"
 			Foreground="#000000" Background="#f8f4ff"
-			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,180,0,0" 
+			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,180,0,0"
 			Text="{Binding User.Password}" />
 		
 		<TextBox
 			x:Name="PasswordBox2" PasswordChar="●"
-			Watermark="Подтвердите Пароль"
+			Watermark="Подтвердите Пароль" CornerRadius="10"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
-			FontSize="14" Padding="7 5 0 0"
 			Foreground="#000000" Background="#f8f4ff"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam" Margin="0,225,0,0" 
 			Text="{Binding Password}"/>
 		
 		<TextBox
 			x:Name="EmailBox" 
-			Watermark="Укажите E-mail"
+			Watermark="Укажите E-mail" CornerRadius="10"
 			Height="30" Width="220" BorderThickness="0.25" Cursor="IBeam"
-			FontSize="14" Padding="7 5 0 0"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			Foreground="#000000" Background="#f8f4ff" 
 			Margin="0,270,0,0"
 			Text="{Binding User.Email}" />
 		
 		<Button			
-			Content="Подтвердить"
+			Content="Подтвердить" CornerRadius="10"
 			Command="{Binding SignUpAcceptCommand}"
 			CommandParameter="{Binding ElementName=Registration}" 
 			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
@@ -72,7 +70,7 @@
 			Height="40" Width="152" Cursor="Hand" Margin="0,375,0,0" />
 		
 		<Button
-			Content="Отмена"
+			Content="Отмена" CornerRadius="10"
 			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 			Command="{Binding CancelCommand}"
 			Foreground="#000000" Background="#7851a9"

@@ -1,14 +1,13 @@
 using Avalonia.Controls;
 using Pelmenara_AUI_RUI.ViewModels;
-using System;
 
 namespace Pelmenara_AUI_RUI.Views
 {
-    public partial class MainWindow : Window
+    public partial class AddRecipeWindow : Window
     {
-        public MainWindow()
+        public AddRecipeWindow()
         {
-            DataContext = new MainWindowViewModel(this);
+            DataContext = new AddRecipeVM();
             InitializeComponent();
         }
     }

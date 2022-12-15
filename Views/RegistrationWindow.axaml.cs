@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Pelmenara_AUI_RUI.ViewModels;
 using System;
+using ReactiveUI.Validation.Extensions;
 
 namespace Pelmenara_AUI_RUI.Views
 {
