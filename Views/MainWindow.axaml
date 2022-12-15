@@ -13,9 +13,9 @@
 		Background="#e6e6fa"
 		x:Name="thisWindow">
 
-    <!--<Design.DataContext>
+    <Design.DataContext>
         <vm:MainWindowViewModel/>
-    </Design.DataContext>-->    
+    </Design.DataContext>    
 	
     <Window.Styles>
         <Style Selector="Button">
@@ -51,7 +51,6 @@
 					Grid.Column="0" Grid.Row="0" 
 					Margin="10,10,5,5">
 
-
 			<TextBox
 				x:Name="search"
 				Watermark="НАЙТИ РЕЦЕПТ..."
@@ -84,7 +83,7 @@
 			
 			<Button 
 				Content="Выход"
-			    Command="{Binding SignOutCommand}"
+			    Command="{Binding LogOutCommand}"
 			    CommandParameter="{Binding ElementName=thisWindow}"
 			    VerticalContentAlignment="Center" 
 			    HorizontalContentAlignment="Center"

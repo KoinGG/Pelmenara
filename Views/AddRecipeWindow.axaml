@@ -37,7 +37,7 @@
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 			<Setter Property="VerticalAlignment" Value="Top"/>
 			<Setter Property="CornerRadius" Value="10"/>
-			<Setter Property="CommandParameter" Value="{Binding AddRecipe}"/>
+			<Setter Property="CommandParameter" Value="{Binding ElementName=AddRecipe}"/>
 		</Style>
 	</Window.Styles>
 	
@@ -86,7 +86,7 @@
 				Height="40" Width="152"/>
 			<Button
 				Content="Отмена"
-				Command="{Binding CancelCommand}" 
+				Command="{Binding CancelCommand}"
 				Name="btn_Cancel"
 				Height="30" Width="90"
 				Margin="0,15,0,0"/>				

@@ -8,7 +8,6 @@ namespace Pelmenara_AUI_RUI
 {
     public partial class App : Application
     {
-        public string dbpass = "youtubesuperlol";
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -22,7 +21,7 @@ namespace Pelmenara_AUI_RUI
                 desktop.MainWindow = new MainWindow
                 {
                     //DataContext = new MainWindowViewModel(),
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel(null)
                 };
             }
 

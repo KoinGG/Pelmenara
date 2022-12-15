@@ -16,20 +16,24 @@ namespace Pelmenara_AUI_RUI.ViewModels
     public class AddRecipeVM : ViewModelBase
     {
         public ReactiveCommand<Window, Unit> AddRecipeAcceptCommand { get; }
-        public ReactiveCommand<Window, Unit> CancelCommand { get; }
+        public ReactiveCommand<AddRecipeWindow, Unit> CancelCommand { get; }
 
         private Recipe _recipe = new Recipe();
 
         private void AddRecipeAcceptCommandImpl(Window window)
         {
-            if(Recipe.Title != null && Recipe.Description != null
-               && Recipe.Ingredients != null && Recipe.CookingTime != null)
+            if (Recipe.Title == null || Recipe.Description == null
+                                     || Recipe.Ingredients == null || Recipe.CookingTime == null)
             {
-                if(Recipe.Title.Length > 30)
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Поля не заполнены", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+            
+            if(Recipe.Title.Length < 30)
                 {
-                    if(Recipe.Ingredients.Length > 200)
+                    if(Recipe.Ingredients.Length < 200)
                     {
-                        if(Recipe.CookingTime.Length > 15)
+                        if(Recipe.CookingTime.Length < 15)
                         {
                             if(Helper.GetContext().Recipes.FirstOrDefault(x => x.Title == Recipe.Title) != null)
                             {
@@ -65,14 +69,9 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 {
                     MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Длина заголовка не должна превышать 30 символов", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
                 }
-            }
-            else
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Поля не заполнены", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-            }
         }
 
-        private void CancelCommandImpl(Window window)
+        private void CancelCommandImpl(AddRecipeWindow window)
         {
             window.Close();
         }
@@ -85,7 +84,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
         public AddRecipeVM()
         {
             AddRecipeAcceptCommand = ReactiveCommand.Create<Window>(AddRecipeAcceptCommandImpl);
-            CancelCommand = ReactiveCommand.Create<Window>(CancelCommandImpl);
+            CancelCommand = ReactiveCommand.Create<AddRecipeWindow>(CancelCommandImpl);
         }
     }
 }
