@@ -53,7 +53,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 return;
             }
 
-
             window.Close();
         }
 

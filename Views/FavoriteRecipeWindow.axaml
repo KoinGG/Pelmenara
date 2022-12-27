@@ -1,0 +1,96 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+        mc:Ignorable="d" 
+		d:DesignWidth="550" d:DesignHeight="1080"
+		Width="550" Height="1080"
+		MaxWidth="550" MaxHeight="1080"
+		MinWidth="550" MinHeight="1080"
+        x:Class="Pelmenara_AUI_RUI.Views.FavoriteRecipeWindow"
+        Title="FavoriteRecipeWindow"
+		Background="#e6e6fa">
+
+	<Design.DataContext>
+		<vm:FavoriteRecipeVM/>
+	</Design.DataContext>
+
+	<Window.Styles>
+		<Style Selector="Label">
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="Medium"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<Style Selector="TextBlock.RecipeDescription">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="Margin" Value="20,30,0,10"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0">
+
+			<TextBlock
+				Text="Избранное" Foreground="#7851a9"
+				TextAlignment="Center" FontWeight="Medium"
+				HorizontalAlignment="Center" VerticalAlignment="Top"
+				FontSize="40" Margin="0,30,0,0" />
+		</StackPanel>
+
+		<StackPanel Grid.Row="1">
+			<ListBox Background="#e6e6fa"
+					 BorderBrush="Black" BorderThickness="1"
+					 SelectedItem="{Binding IfRecipeSelected}"
+					 Items="{Binding FavoriteRecipes}"
+					 Height="970" x:Name="listbox_FavoriteRecipes"
+					 ScrollViewer.VerticalScrollBarVisibility="Visible">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="30"/>
+								<RowDefinition Height="50*"/>
+								<RowDefinition Height="30*"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock
+								Grid.Row="0" Text="{Binding Recipe.Title}"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Top"
+								TextWrapping="Wrap"
+								FontSize="24" FontWeight="DemiBold"/>
+
+							<Label Grid.Row="1" Content="Описание:"/>
+							<TextBlock
+								Classes="RecipeDescription" Width="400"
+								Grid.Row="1" Text="{Binding Recipe.Description}"/>
+
+							<Label Grid.Row="2" Content="Ингридиенты:"/>
+							<TextBlock
+								Classes="RecipeDescription"
+								Grid.Row="2" Text="{Binding Recipe.Ingredients}"/>
+
+							<Border Grid.Row="2"
+								Height="1" Width="1850"
+								VerticalAlignment="Bottom"
+								Background="Black"/>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+		
+	</Grid>	
+</Window>

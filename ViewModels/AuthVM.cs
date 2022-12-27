@@ -48,10 +48,30 @@ namespace Pelmenara_AUI_RUI.ViewModels
             }
         }
 
+        public bool SignInAcceptCommandImpl(string Login, string Password)
+        {
+            if((Login == "123" && Password == "456") || (Login == "321" && Password == "654"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private async void SignUpCommandImpl(Window window)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();
-            await registrationWindow.ShowDialog(window).WaitAsync(TimeSpan.FromMinutes(60));
+            try
+            {
+                await registrationWindow.ShowDialog(window).WaitAsync(TimeSpan.FromMinutes(60));
+            }
+            catch
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Время регистрации истекло", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                registrationWindow.Close();
+            }
         }
 
         public AuthVM()
