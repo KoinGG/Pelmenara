@@ -27,6 +27,11 @@ create table "Recipe"
 create table "FavoriteRecipe"
 (
 	"FavoriteRecipeID" int not null primary key generated always as identity,
+<<<<<<< Updated upstream
 	"RecipeID" int not null references "Recipe",
 	"UserID" int not null references "User"
+=======
+	"RecipeID" int not null references "Recipe" on delete cascade,
+	"UserID" int not null references "User" 
+>>>>>>> Stashed changes
 )
