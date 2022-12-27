@@ -10,7 +10,8 @@
 		MinHeight="750" MinWidth="650"
 		MaxHeight="750" MaxWidth="650"
 		d:DesignHeight="750" d:DesignWidth="650"
-		Background="#e6e6fa">
+		Background="#e6e6fa"
+		x:Name="thisWindow">
 
 	<!--<Design.DataContext>
 		<vm:RecipeVM/>
@@ -54,8 +55,8 @@
 				TextAlignment="Center" FontWeight="Medium"
 				HorizontalAlignment="Stretch" VerticalAlignment="Top"
 				FontSize="40" Margin="0,30,0,0">
-				<Run Text="{Binding Recipe.Title}, Mode=OneWay"/>
-				<Run Text="{Binding FavoriteRecipe.Recipe.Title}, Mode=OneWay"/>
+				<Run Text="{Binding Recipe.Title, Mode=OneWay}"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Title, Mode=OneWay}"/>
 			</TextBlock>
 		</StackPanel>
 		
@@ -74,16 +75,16 @@
 			<TextBlock				
 				TextWrapping="Wrap"
 				Margin="10,5,0,0">
-				<Run Text="{Binding Recipe.Ingredients}, Mode=OneWay"/>
-				<Run Text="{Binding FavoriteRecipe.Recipe.Ingredients}, Mode=OneWay"/>
+				<Run Text="{Binding Recipe.Ingredients, Mode=OneWay}"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Ingredients, Mode=OneWay}"/>
 			</TextBlock>
 			
 			<Label Content="Время готовки:"/>
 			<TextBlock
 				TextWrapping="Wrap"
 				Margin="10,5,0,0">
-				<Run Text="{Binding Recipe.CookingTime}, Mode=OneWay"/>
-				<Run Text="{Binding FavoriteRecipe.Recipe.CookingTime}, Mode=OneWay"/>
+				<Run Text="{Binding Recipe.CookingTime, Mode=OneWay}"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.CookingTime, Mode=OneWay}"/>
 			</TextBlock>
 		</StackPanel>
 
@@ -94,16 +95,16 @@
 				   Margin="0,0,0,0"/>
 			<TextBlock
 				Margin="135,-22,0,0">
-				<Run Text="{Binding Recipe.CreationDate}, Mode=OneWay"/>
-				<Run Text="{Binding FavoriteRecipe.Recipe.CreationDate}, Mode=OneWay"/>
+				<Run Text="{Binding Recipe.CreationDate, Mode=OneWay}"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.CreationDate, Mode=OneWay}"/>
 			</TextBlock>
 			
 			<Label Content="Создатель:"
 				   Margin="0,0,0,0"/>
 			<TextBlock
 				Margin="135,-22,0,0">
-				<Run Text="{Binding Recipe.Owner.Login}, Mode=OneWay"/>
-				<Run Text="{Binding FavoriteRecipe.Recipe.Owner.Login}, Mode=OneWay"/>
+				<Run Text="{Binding Recipe.Owner.Login, Mode=OneWay}"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Owner.Login, Mode=OneWay}"/>
 			</TextBlock>
 		</StackPanel>
 

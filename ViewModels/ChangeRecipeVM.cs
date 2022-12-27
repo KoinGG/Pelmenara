@@ -22,8 +22,9 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         private void ChangeRecipeAcceptCommandImpl(Window window)
         {
-            if (Recipe.Title == null || Recipe.Description == null
-               || Recipe.Ingredients == null || Recipe.CookingTime == null)
+            if (Recipe.Title == null || Recipe.Description == null || Recipe.Ingredients == null || Recipe.CookingTime == null
+             || Recipe.Title == ""   || Recipe.Description == ""   || Recipe.Ingredients == ""   || Recipe.CookingTime == ""
+             || Recipe.Title == " "  || Recipe.Description == " "  || Recipe.Ingredients == " "  || Recipe.CookingTime == " ")
             {
                 MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Поля не заполнены", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
                 return;
@@ -66,6 +67,33 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         }
 
+
+        public bool ChangeRecipeAcceptCommandImpl(string Title, string Description, string Ingredients, string CookingTime)
+        {
+            if (Title == null || Description == null || Ingredients == null || CookingTime == null
+             || Title == "" || Description == "" || Ingredients == "" || CookingTime == ""
+             || Title == " " || Description == " " || Ingredients == " " || CookingTime == " ")
+            {
+                return false;
+            }
+            else if (Title.Length > 30)
+            {
+                return false;
+            }
+            else if (Ingredients.Length > 200)
+            {
+                return false;
+            }
+            else if (CookingTime.Length > 15)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void CancelCommandImpl(Window window)
         {
             window.Close();
@@ -77,8 +105,10 @@ namespace Pelmenara_AUI_RUI.ViewModels
             set { this.RaiseAndSetIfChanged(ref _recipe, value); }
         }
 
-        public ChangeRecipeVM()
+        public ChangeRecipeVM(Recipe recipe)
         {
+            Recipe = recipe;
+
             ChangeRecipeAcceptCommand = ReactiveCommand.Create<Window>(ChangeRecipeAcceptCommandImpl);
             CancelCommand = ReactiveCommand.Create<Window>(CancelCommandImpl);
         }

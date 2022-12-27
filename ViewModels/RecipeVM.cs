@@ -36,7 +36,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         private async void ChangeRecipeCommandImpl(Window window)
         {
-            ChangeRecipeWindow changeRecipeWindow = new ChangeRecipeWindow();
+            ChangeRecipeWindow changeRecipeWindow = new ChangeRecipeWindow(_recipe);
             await changeRecipeWindow.ShowDialog(window).WaitAsync(CancellationToken.None);
         }
 
@@ -53,7 +53,7 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 return;
             }
 
-            window.Close(); // ОШИБКА НУЛ НАХУЙ
+            window.Close();
         }
 
         private void AddFavoriteRecipeCommandImpl(RecipeWindow window)
@@ -64,14 +64,25 @@ namespace Pelmenara_AUI_RUI.ViewModels
             {
                 Helper.GetContext().FavoriteRecipes.Add(FavoriteRecipe);
                 Helper.GetContext().SaveChanges();
-
-                window.btn_AddFavoriteRecipe.IsEnabled = false; // ТОЖЕ КАКАЯ ТО ОШИБКА БЛЯТЬ РОТ ЕБАЛ
             }
             catch
             {
                 MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось добавить рецепт в избранное", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
                 return;
             }
+        }
+
+        public bool AddFavoriteRecipeCommandImpl(int UserId, int RecipeId)
+        {
+            if(Helper.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == UserId && x.RecipeId == RecipeId) == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public void SomeMethod(RecipeWindow window)
@@ -85,8 +96,12 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 window.btn_DeleteRecipe.IsEnabled = true;
             }
 
+            if (Helper.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == MainWindowViewModel.User.UserId && x.RecipeId == Recipe.RecipeId) == null)
+            {
+                window.btn_AddFavoriteRecipe.IsEnabled = true;
+            }            
+
             window.btn_AddFavoriteRecipe.IsVisible = true;
-            window.btn_AddFavoriteRecipe.IsEnabled = true;
         }
 
         public RecipeVM(Recipe recipe)
@@ -96,11 +111,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
             ChangeRecipeCommand = ReactiveCommand.Create<Window>(ChangeRecipeCommandImpl);
             DeleteRecipeCommand = ReactiveCommand.Create<Window>(DeleteRecipeCommandImpl);
             AddFavoriteRecipeCommand = ReactiveCommand.Create<RecipeWindow>(AddFavoriteRecipeCommandImpl);
-        }
-
-        public RecipeVM(FavoriteRecipe favoriteRecipe)
-        {
-            _favoriteRecipe = favoriteRecipe;
         }
     }
 }

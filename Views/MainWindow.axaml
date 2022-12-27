@@ -12,7 +12,8 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Pelmenara"
 		Background="#e6e6fa"
-		x:Name="thisWindow">
+		x:Name="thisWindow"
+		WindowStartupLocation="CenterScreen">
 
     <!--<Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -67,7 +68,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		
-		<StackPanel Grid.Column="0" Grid.Row="0" 
+				<StackPanel Grid.Column="0" Grid.Row="0" 
 					Margin="10,10,5,5">
 
 			<TextBox				

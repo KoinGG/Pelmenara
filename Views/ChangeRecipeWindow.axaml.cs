@@ -7,8 +7,12 @@ namespace Pelmenara_AUI_RUI.Views
     {
         public ChangeRecipeWindow()
         {
-            DataContext = new ChangeRecipeVM();
             InitializeComponent();
+        }
+
+        public ChangeRecipeWindow(Recipe recipe) : this()
+        {
+            DataContext = new ChangeRecipeVM(recipe);
         }
     }
 }

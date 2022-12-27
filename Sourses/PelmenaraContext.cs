@@ -42,7 +42,7 @@ public partial class PelmenaraContext : DbContext
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.FavoriteRecipes)
                 .HasForeignKey(d => d.RecipeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FavoriteRecipe_RecipeID_fkey");
 
             entity.HasOne(d => d.User).WithMany(p => p.FavoriteRecipes)

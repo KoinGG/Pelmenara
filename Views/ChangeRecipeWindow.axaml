@@ -47,7 +47,7 @@
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 			<Setter Property="VerticalAlignment" Value="Top"/>
 			<Setter Property="CornerRadius" Value="10"/>
-			<Setter Property="CommandParameter" Value="{Binding ElementName=AddRecipe}"/>
+			<Setter Property="CommandParameter" Value="{Binding ElementName=ChangeRecipe}"/>
 		</Style>
 	</Window.Styles>
 
@@ -60,7 +60,7 @@
 
 		<StackPanel Grid.Row="0">
 			<TextBlock Grid.Row="0"
-				Text="Добавление Рецепта"  Foreground="#7851a9"
+				Text="Изменение Рецепта"  Foreground="#7851a9"
 				TextAlignment="Center" FontWeight="Medium"
 				HorizontalAlignment="Stretch" VerticalAlignment="Top"
 				FontSize="40" Margin="0,30,0,0" />
@@ -93,8 +93,8 @@
 		<StackPanel Grid.Row="2">
 			<Button
 				Content="Подтвердить"
-				Command="{Binding AddRecipeAcceptCommand}"
-				Name="btn_AddRecipeAcceptCommand"
+				Command="{Binding ChangeRecipeAcceptCommand}"
+				Name="btn_ChangeRecipeAcceptCommand"
 				FontSize="16"
 				Height="40" Width="152"/>
 			<Button

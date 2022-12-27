@@ -6,11 +6,15 @@ namespace Pelmenara_AUI_RUI.Views
 {
     public partial class RecipeWindow : Window
     {
-        public RecipeWindow(Recipe recipe)
+        public RecipeWindow()
+        {
+            InitializeComponent();
+        }
+
+        public RecipeWindow(Recipe recipe) : this()
         {
             DataContext = new RecipeVM(recipe);
-            (DataContext as RecipeVM).SomeMethod(this);            
-            InitializeComponent();
+            (DataContext as RecipeVM).SomeMethod(this);
         }
     }
 }
