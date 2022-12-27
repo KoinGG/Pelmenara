@@ -12,10 +12,10 @@
 		MaxHeight="500" MaxWidth="400"
 		Background="#e6e6fa"
 		x:Name="Registration">
-	
-    <Window.DataContext>
-        <vm:RegistrationVM/>
-    </Window.DataContext>
+
+	<Design.DataContext>
+		<vm:RegistrationVM/>
+	</Design.DataContext>
 	
 	<Grid x:Name="RegistrationGrid">
 		

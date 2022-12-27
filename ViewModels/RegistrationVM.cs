@@ -28,56 +28,84 @@ namespace Pelmenara_AUI_RUI.ViewModels
 
         private void SignUpAcceptCommandImpl(Window window)
         {
-
-            if (User.Login != null && User.Email != null && User.Password != null)
+            if(User.Login == null || User.Email == null || User.Password == null
+            || User.Login == ""   || User.Email == ""   || User.Password == ""
+            || User.Login == " "  || User.Email == " "  || User.Password == " ")
             {
-                if(User.Login.Length >= 4)
-                {
-                    if(User.Password.Length >= 6)
-                    {
-                        if (User.Password != Password)
-                        {
-                            MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пароли не совпадают", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                            return;
-                        }
-                        else if (Helper.GetContext().Users.FirstOrDefault(x => x.Login == User.Login || x.Email == User.Email) != null)
-                        {
-                            MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пользователь с таким Login или Email уже существует", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                            return;
-                        }
-                        if (User.Email.Contains("@") && User.Email.Contains("."))
-                        {
-                            try
-                            {
-                                Helper.GetContext().Users.Add(User);
-                                Helper.GetContext().SaveChanges();
-                            }
-                            catch
-                            {
-                                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось создать пользователя", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                                return;
-                            }
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не заполнены все поля", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+            if(User.Login.Length < 4)
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Логин должен иметь больше трёх символов", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+            if(User.Password.Length < 6)
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пароль должен иметь не меньше 6 символов", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+            if(User.Password != Password)
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пароли не совпадают", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+            if(Helper.GetContext().Users.FirstOrDefault(x => x.Login == User.Login || x.Email == User.Email) != null)
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пользователь с таким Login или Email уже существует", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+            if(!User.Email.Contains("@") || !User.Email.Contains("."))
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не корректный Email", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
 
-                            window.Close();
-                        }
-                        else
-                        {
-                            MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не корректный Email", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                        }
-                    }
-                    else
-                    {
-                        MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Пароль должен иметь больше пяти символов", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                    }
-                }
-                else
-                {
-                    MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Логин должен иметь больше трёх символов", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                }
+            try
+            {
+                Helper.GetContext().Users.Add(User);
+                Helper.GetContext().SaveChanges();
+            }
+            catch
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось создать пользователя", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+
+            window.Close();
+        }
+
+        public bool SignUpAcceptCommandImpl(string Login, string Password, string Password2, string Email)
+        {
+            if (Login == null || Email == null || Password == null
+             || Login == ""   || Email == ""   || Password == ""
+             || Login == " "  || Email == " "  || Password == " ")
+            {
+                return false;
+            }
+            else if (Login.Length < 4)
+            {                
+                return false;
+            }
+            else if (Password.Length < 6)
+            {
+                return false;
+            }
+            else if (Password != Password2)
+            {
+                return false;
+            }
+            else if (Helper.GetContext().Users.FirstOrDefault(x => x.Login == Login || x.Email == Email) != null)
+            {
+                return false;
+            }
+            else if (!Email.Contains("@") || !Email.Contains("."))
+            {
+                return false;
             }
             else
             {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не заполнены все поля", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return true;
             }
         }
 

@@ -5,37 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:sg="clr-namespace:AvaloniaSpacedGrid;assembly=AvaloniaSpacedGrid"
         mc:Ignorable="d" 
-		d:DesignWidth="550" d:DesignHeight="600"
-		Width="550" Height="600"
+		d:DesignWidth="550" d:DesignHeight="1080"
+		Width="550" Height="1080"
+		MinWidth="550" MinHeight="1080"
         x:Class="Pelmenara_AUI_RUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Pelmenara"
 		Background="#e6e6fa"
 		x:Name="thisWindow">
 
-    <Design.DataContext>
+    <!--<Design.DataContext>
         <vm:MainWindowViewModel/>
-    </Design.DataContext>    
-	
-    <Window.Styles>
-        <Style Selector="Button">
-            <Setter Property="Foreground" Value="#000000" />
-            <Setter Property="Background" Value="#7851a9" />
+    </Design.DataContext>-->
+
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="Foreground" Value="#000000" />
+			<Setter Property="Background" Value="#7851a9" />
 			<Setter Property="CornerRadius" Value="10"/>
-        </Style>
-		
+			<Setter Property="CommandParameter" Value="{Binding ElementName=thisWindow}"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Cursor" Value="Arrow"/>
+		</Style>
+		<Style Selector="Button.Recipe">
+			<Setter Property="Foreground" Value="#000000" />
+			<Setter Property="Background" Value="#7851a9" />
+			<Setter Property="CommandParameter" Value="{Binding ElementName=thisWindow}"/>
+			<Setter Property="IsEnabled" Value="False"/>
+			<Setter Property="IsVisible" Value="True"/>
+			<Setter Property="Width" Value="95"/>			
+			<Setter Property="Height" Value="48"/>			
+			<Setter Property="Cursor" Value="Arrow"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="CornerRadius" Value="10"/>
+		</Style>
+
 		<Style Selector="Label">
 			<Setter Property="FontSize" Value="16"/>
 			<Setter Property="FontWeight" Value="Medium"/>
 			<Setter Property="VerticalAlignment" Value="Top"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
-		
+
 		<Style Selector="TextBlock.RecipeDescription">
 			<Setter Property="TextWrapping" Value="Wrap"/>
 			<Setter Property="Margin" Value="20,30,0,10"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
-    </Window.Styles>
+	</Window.Styles>
 
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -47,61 +67,59 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		
-		<StackPanel Background="LightBlue" 
-					Grid.Column="0" Grid.Row="0" 
+		<StackPanel Grid.Column="0" Grid.Row="0" 
 					Margin="10,10,5,5">
 
-			<TextBox
-				x:Name="search"
+			<TextBox				
+				x:Name="textBox_Search"
 				Watermark="НАЙТИ РЕЦЕПТ..."
-				Height="32"					
+				Height="32"	Width="350"
+				HorizontalAlignment="Left"
 				Margin="0,26,0,0"
 				CornerRadius="15"/>
-
-			<TextBlock 
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center"
-				x:Name="text00"
-				Text="{Binding Text00}"/>
+			
+			<Button
+				Content="Искать" x:Name="btn_Search"
+				Command="{Binding SearchCommand}"
+				HorizontalAlignment="Right"
+				Margin="0,-32,7,0"/>
+			
 		</StackPanel>
 		
-		<StackPanel Background="LightPink" 
-					Grid.Column="1" Grid.Row="0"
+		<StackPanel Grid.Column="1" Grid.Row="0"
 					Margin="5,10,10,5">
 
 			<Button 
 				Content="Вход" 
 				Command="{Binding SignInCommand}"
-				CommandParameter="{Binding ElementName=thisWindow}"
 				VerticalContentAlignment="Center" 
 				HorizontalContentAlignment="Center"
 				Width="62" Height="30"
 				x:Name="btn_SignIn"
 				IsEnabled="True" IsVisible="True"
 				HorizontalAlignment="Center"
-				Margin="0,27,0,0" Cursor="Arrow"/>
+				Margin="0,27,0,0"/>
 			
 			<Button 
 				Content="Выход"
 			    Command="{Binding LogOutCommand}"
-			    CommandParameter="{Binding ElementName=thisWindow}"
 			    VerticalContentAlignment="Center" 
 			    HorizontalContentAlignment="Center"
 			    Width="62" Height="30"
 			    x:Name="btn_LogOut"
 			    IsEnabled="False" IsVisible="False"
 				HorizontalAlignment="Center"
-			    Margin="0,27,0,0" Cursor="Arrow"/>
+			    Margin="0,27,0,0"/>
 		</StackPanel>
 		
-		<StackPanel Background="LightGreen" 
-					Grid.Column="0" Grid.Row="1"
+		<StackPanel Grid.Column="0" Grid.Row="1"
 					Margin="10,5,5,5">
 
-			<ListBox Background="Azure"
+			<ListBox Background="#e6e6fa"
+					 BorderBrush="Black" BorderThickness="1"
 					 SelectedItem="{Binding IfRecipeSelected}"
 					 Items="{Binding Recipes}"
-					 Height="500"
+					 Height="970" x:Name="listbox_Recipes"
 					 ScrollViewer.VerticalScrollBarVisibility="Visible">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
@@ -111,83 +129,65 @@
 								<RowDefinition Height="50*"/>
 								<RowDefinition Height="30*"/>
 							</Grid.RowDefinitions>
-							<StackPanel
-								Grid.Row="0"
-								Background="Red"/>
-							<StackPanel
-								Grid.Row="1"
-								Background="Yellow"/>
-							<StackPanel
-								Grid.Row="2"
-								Background="Green"/>
 							
 							<TextBlock 
 								Grid.Row="0" Text="{Binding Title}" 
 								HorizontalAlignment="Center"
-								FontSize="22" FontWeight="DemiBold"/>
+								VerticalAlignment="Top"
+								TextWrapping="Wrap"
+								FontSize="24" FontWeight="DemiBold"/>
 							
 							<Label Grid.Row="1" Content="Описание:"/>
 							<TextBlock 
-								Classes="RecipeDescription"
+								Classes="RecipeDescription" Width="400"
 								Grid.Row="1" Text="{Binding Description}"/>
 							
 							<Label Grid.Row="2" Content="Ингридиенты:"/>
-							<TextBlock
+							<TextBlock								
 								Classes="RecipeDescription"
 								Grid.Row="2" Text="{Binding Ingredients}"/>
+							
+							<Border Grid.Row="2"
+								Height="1" Width="1850"
+								VerticalAlignment="Bottom" 
+								Background="Black"/>
 						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
-			</ListBox>			
-			
-			<TextBlock 
-				HorizontalAlignment="Center"
-				VerticalAlignment="Center"
-				x:Name="text01" 
-				Text="{Binding Text01}"/>
+			</ListBox>
 		</StackPanel>
 		
-		<StackPanel Background="LightYellow" 
-					Grid.Column="1" Grid.Row="1"
+		<StackPanel Grid.Column="1" Grid.Row="1"
 					Margin="5,5,10,10">
+
+			<Label 
+				Content="Фильтр:"
+				FontSize="14"/>
 			
-			<Button 
-				Command="{Binding AddRecipeCommand}" x:Name="btn_AddRecipe"					
-				CommandParameter="{Binding ElementName=thisWindow}"
-				IsEnabled="False" IsVisible="True"
-				Width="85" Height="48"
-				Margin="0,50,0,0" Cursor="Arrow">				
+			<ComboBox 
+				Width="100"
+				HorizontalAlignment="Center"
+				CornerRadius="10"
+				SelectedIndex="{Binding SelectedFilter}">				
+				<TextBlock Text="Новые"/>
+				<TextBlock Text="Старые"/>
+			</ComboBox>
+			
+			<Button Classes="Recipe"
+				Command="{Binding AddRecipeCommand}" 
+				x:Name="btn_AddRecipe"
+				Margin="0,50,0,0">				
 				<TextBlock TextAlignment="Center"> 
 					Добавить <LineBreak/> рецепт
 				</TextBlock>
 			</Button>
+
+			<Button Classes="Recipe"
+				Content="Избранное"
+				Command="{Binding FavoriteRecipesCommand}"
+				x:Name="btn_FavoriteRecipes"
+				Margin="0,15,0,0"/>
 			
-			<Button
-				Command="{Binding }" x:Name="btn_ChangeRecipe"					
-				CommandParameter="{Binding ElementName=thisWindow}"
-				IsEnabled="False" IsVisible="True"
-				Width="85" Height="48"
-				Margin="0,15,0,0" Cursor="Arrow">				
-				<TextBlock TextAlignment="Center"> 
-					Изменить <LineBreak/> рецепт
-				</TextBlock>
-			</Button>
-			
-			<Button
-				Command="{Binding }" x:Name="btn_DeleteRecipe"					
-				CommandParameter="{Binding ElementName=thisWindow}"
-				IsEnabled="False" IsVisible="True"
-				Width="85" Height="48"
-				Margin="0,15,0,0" Cursor="Arrow">
-				<TextBlock TextAlignment="Center"> 
-					Удалить <LineBreak/> рецепт
-				</TextBlock>
-			</Button>
-			
-			<TextBlock HorizontalAlignment="Center"
-					   VerticalAlignment="Center"
-					   x:Name="text11"
-					   Text="{Binding Text11}"/>
 		</StackPanel>
 	</Grid>	
 </Window>

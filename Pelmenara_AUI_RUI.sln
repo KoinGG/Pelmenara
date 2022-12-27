@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pelmenara_AUI_RUI", "Pelmenara_AUI_RUI.csproj", "{BFDDF680-1BA8-479D-BEFD-6B020FEA5EE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pelmenara_AUI_RUI", "Pelmenara_AUI_RUI.csproj", "{BFDDF680-1BA8-479D-BEFD-6B020FEA5EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PelmenaraTests", "..\PelmenaraTests\PelmenaraTests.csproj", "{24950231-59F1-48E0-83DE-0362E16D9946}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BFDDF680-1BA8-479D-BEFD-6B020FEA5EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFDDF680-1BA8-479D-BEFD-6B020FEA5EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFDDF680-1BA8-479D-BEFD-6B020FEA5EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24950231-59F1-48E0-83DE-0362E16D9946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24950231-59F1-48E0-83DE-0362E16D9946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24950231-59F1-48E0-83DE-0362E16D9946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24950231-59F1-48E0-83DE-0362E16D9946}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

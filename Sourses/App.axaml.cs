@@ -17,12 +17,7 @@ namespace Pelmenara_AUI_RUI
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                //desktop.MainWindow = new MainWindow
-                desktop.MainWindow = new MainWindow
-                {
-                    //DataContext = new MainWindowViewModel(),
-                    DataContext = new MainWindowViewModel(null)
-                };
+                desktop.MainWindow = new MainWindow();
             }
 
             base.OnFrameworkInitializationCompleted();

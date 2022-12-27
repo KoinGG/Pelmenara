@@ -1,0 +1,142 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+        mc:Ignorable="d"
+        x:Class="Pelmenara_AUI_RUI.Views.RecipeWindow"
+        Title="RecipeWindow"
+		Height="750" Width="650"
+		MinHeight="750" MinWidth="650"
+		MaxHeight="750" MaxWidth="650"
+		d:DesignHeight="750" d:DesignWidth="650"
+		Background="#e6e6fa">
+
+	<!--<Design.DataContext>
+		<vm:RecipeVM/>
+	</Design.DataContext>-->
+
+	<Window.Styles>
+		<Style Selector="Label">
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="Medium"/>
+			<Setter Property="Margin" Value="0,30,0,0"/>
+		</Style>
+		<Style Selector="Button.Recipe">
+			<Setter Property="Foreground" Value="#000000" />
+			<Setter Property="Background" Value="#7851a9" />
+			<Setter Property="CommandParameter" Value="{Binding ElementName=thisWindow}"/>
+			<Setter Property="IsEnabled" Value="False"/>
+			<Setter Property="IsVisible" Value="False"/>
+			<Setter Property="Width" Value="85"/>
+			<Setter Property="Height" Value="48"/>
+			<Setter Property="Cursor" Value="Arrow"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="CornerRadius" Value="10"/>
+		</Style>
+	</Window.Styles>
+	
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="100"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="65"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Grid.Column="0">
+			<TextBlock
+				TextWrapping="WrapWithOverflow"
+				Foreground="#000000"
+				TextAlignment="Center" FontWeight="Medium"
+				HorizontalAlignment="Stretch" VerticalAlignment="Top"
+				FontSize="40" Margin="0,30,0,0">
+				<Run Text="{Binding Recipe.Title}, Mode=OneWay"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Title}, Mode=OneWay"/>
+			</TextBlock>
+		</StackPanel>
+		
+		<StackPanel Grid.Row="1" Grid.Column="0"
+					Margin="50,25,50,0">
+			
+			<Label Content="Описание Рецепта:"/>
+			<TextBlock				
+				TextWrapping="Wrap"
+				Margin="10,5,0,0">
+				<Run Text="{Binding Recipe.Description, Mode=OneWay}"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Description, Mode=OneWay}"/>
+			</TextBlock>
+			
+			<Label Content="Ингредиенты:"/>
+			<TextBlock				
+				TextWrapping="Wrap"
+				Margin="10,5,0,0">
+				<Run Text="{Binding Recipe.Ingredients}, Mode=OneWay"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Ingredients}, Mode=OneWay"/>
+			</TextBlock>
+			
+			<Label Content="Время готовки:"/>
+			<TextBlock
+				TextWrapping="Wrap"
+				Margin="10,5,0,0">
+				<Run Text="{Binding Recipe.CookingTime}, Mode=OneWay"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.CookingTime}, Mode=OneWay"/>
+			</TextBlock>
+		</StackPanel>
+
+		<StackPanel Grid.Row="2" Grid.Column="0"
+					Margin="50,0,50,10">
+
+			<Label Content="Дата создания:"
+				   Margin="0,0,0,0"/>
+			<TextBlock
+				Margin="135,-22,0,0">
+				<Run Text="{Binding Recipe.CreationDate}, Mode=OneWay"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.CreationDate}, Mode=OneWay"/>
+			</TextBlock>
+			
+			<Label Content="Создатель:"
+				   Margin="0,0,0,0"/>
+			<TextBlock
+				Margin="135,-22,0,0">
+				<Run Text="{Binding Recipe.Owner.Login}, Mode=OneWay"/>
+				<Run Text="{Binding FavoriteRecipe.Recipe.Owner.Login}, Mode=OneWay"/>
+			</TextBlock>
+		</StackPanel>
+
+		<StackPanel Grid.Row="1" Grid.Column="1">
+
+			<Button Classes="Recipe"
+				Command="{Binding ChangeRecipeCommand}"
+				x:Name="btn_ChangeRecipe"
+				Margin="0,15,0,0">
+				<TextBlock TextAlignment="Center">
+					Изменить <LineBreak/> рецепт
+				</TextBlock>
+			</Button>
+
+			<Button Classes="Recipe"
+				Command="{Binding DeleteRecipeCommand}"
+				x:Name="btn_DeleteRecipe"
+				Margin="0,15,0,0">
+				<TextBlock TextAlignment="Center">
+					Удалить <LineBreak/> рецепт
+				</TextBlock>
+			</Button>
+
+			<Button Classes="Recipe"
+				Command="{Binding AddFavoriteRecipeCommand}"
+				x:Name="btn_AddFavoriteRecipe"
+				Width="95" Height="65"
+				Margin="0,15,0,0">
+				<TextBlock TextAlignment="Center">
+					Добавить <LineBreak/> в <LineBreak/> избранное
+				</TextBlock>
+			</Button>			
+		</StackPanel>
+		
+	</Grid>
+</Window>

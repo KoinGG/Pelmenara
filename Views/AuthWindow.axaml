@@ -12,9 +12,11 @@
 		MaxHeight="400" MaxWidth="400"
 		Background="#e6e6fa"
 		x:Name="Auth">
+	
 	<Design.DataContext>
 		<vm:AuthVM/>
 	</Design.DataContext>
+	
 	<Grid>
 		<TextBlock
 			Text="Авторизация"  Foreground="#7851a9"

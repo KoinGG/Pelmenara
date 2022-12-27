@@ -4,18 +4,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
         mc:Ignorable="d"
-        x:Class="Pelmenara_AUI_RUI.Views.AddRecipeWindow"
+        x:Class="Pelmenara_AUI_RUI.Views.ChangeRecipeWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AddRecipe"
+        Title="ChangeRecipe"
 		Height="750" Width="400"
 		MinHeight="750" MinWidth="550"
 		MaxHeight="750" MaxWidth="550"
 		d:DesignHeight="750" d:DesignWidth="550"
 		Background="#e6e6fa"
-		x:Name="AddRecipe">
+		x:Name="ChangeRecipe">
 
 	<Design.DataContext>
-		<vm:AddRecipeVM/>
+		<vm:ChangeRecipeVM/>
 	</Design.DataContext>
 
 	<Window.Styles>
@@ -50,14 +50,14 @@
 			<Setter Property="CommandParameter" Value="{Binding ElementName=AddRecipe}"/>
 		</Style>
 	</Window.Styles>
-	
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="100"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="135"/>
 		</Grid.RowDefinitions>
-		
+
 		<StackPanel Grid.Row="0">
 			<TextBlock Grid.Row="0"
 				Text="Добавление Рецепта"  Foreground="#7851a9"
@@ -76,7 +76,7 @@
 				Watermark="Добавьте описание"
 				TextWrapping="Wrap" Height="100"
 				Margin="0,20,0,0"/>
-			<TextBox 
+			<TextBox
 				x:Name="IngredientsBox" Text="{Binding Recipe.Ingredients}"
 				Watermark="Добавьте ингридиенты"
 				TextWrapping="Wrap" Height="100"
@@ -95,14 +95,14 @@
 				Content="Подтвердить"
 				Command="{Binding AddRecipeAcceptCommand}"
 				Name="btn_AddRecipeAcceptCommand"
-				FontSize="16" 
+				FontSize="16"
 				Height="40" Width="152"/>
 			<Button
 				Content="Отмена"
 				Command="{Binding CancelCommand}"
 				Name="btn_Cancel"
 				Height="30" Width="90"
-				Margin="0,15,0,0"/>				
-		</StackPanel>		
-	</Grid>	
+				Margin="0,15,0,0"/>
+		</StackPanel>
+	</Grid>
 </Window>

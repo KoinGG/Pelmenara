@@ -3,24 +3,17 @@ create table "User"
 	"UserID" int not null primary key generated always as identity,
 	"Login" varchar(25) not null unique,
 	"Password" varchar(50) not null,
-	"Email" varchar not null unique check("Email" like('%@%.%'))
-);
-
-create table "RecipePhoto"
-(
-	"RecipePhotoID" int not null primary key generated always as identity,
-	"PhotoPath" varchar not null unique check("PhotoPath" != '')
+	"Email" varchar not null unique
 );
 
 create table "Recipe"
 (
 	"RecipeID" int not null primary key generated always as identity,
-	"Title" varchar(25) not null check("Title" != ''),
-	"PhotoID" int not null references "RecipePhoto",
-	"Description" varchar not null check("Description" != ''),
-	"Ingredients"  varchar not null check("Ingredients" != ''),
-	"CookingTime" varchar not null check("CookingTime" != ''),
-	"CreationDate" date not null,
+	"Title" varchar(30) not null check("Title" != ''),
+	"Description" text not null check("Description" != ''),
+	"Ingredients" varchar(200) not null check("Ingredients" != ''),
+	"CookingTime" varchar(15) not null check("CookingTime" != ''),
+	"CreationDate" timestamp not null default current_date,
 	"OwnerID" int not null references "User"("UserID")
 );
 
@@ -28,5 +21,5 @@ create table "FavoriteRecipe"
 (
 	"FavoriteRecipeID" int not null primary key generated always as identity,
 	"RecipeID" int not null references "Recipe",
-	"UserID" int not null references "User"
+	"UserID" int not null references "User" 
 )
