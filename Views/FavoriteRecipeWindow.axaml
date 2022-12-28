@@ -10,6 +10,7 @@
 		MinWidth="550" MinHeight="1080"
         x:Class="Pelmenara_AUI_RUI.Views.FavoriteRecipeWindow"
         Title="FavoriteRecipeWindow"
+		WindowStartupLocation="CenterOwner"
 		Background="#e6e6fa">
 
 	<Design.DataContext>

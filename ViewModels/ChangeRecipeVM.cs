@@ -6,6 +6,7 @@ using Pelmenara_AUI_RUI.Views;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Text;
@@ -44,11 +45,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Превышено допустимое количество символов для поля 'Время Готовки'", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
                 return;
             }
-            if (Helper.GetContext().Recipes.FirstOrDefault(x => x.Title == Recipe.Title) != null)
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Рецепт с таким названием уже существует", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                return;
-            }
 
             try
             {
@@ -64,34 +60,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
             }
 
             window.Close();
-
-        }
-
-
-        public bool ChangeRecipeAcceptCommandImpl(string Title, string Description, string Ingredients, string CookingTime)
-        {
-            if (Title == null || Description == null || Ingredients == null || CookingTime == null
-             || Title == "" || Description == "" || Ingredients == "" || CookingTime == ""
-             || Title == " " || Description == " " || Ingredients == " " || CookingTime == " ")
-            {
-                return false;
-            }
-            else if (Title.Length > 30)
-            {
-                return false;
-            }
-            else if (Ingredients.Length > 200)
-            {
-                return false;
-            }
-            else if (CookingTime.Length > 15)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
         }
 
         private void CancelCommandImpl(Window window)

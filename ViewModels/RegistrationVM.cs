@@ -75,40 +75,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
             window.Close();
         }
 
-        public bool SignUpAcceptCommandImpl(string Login, string Password, string Password2, string Email)
-        {
-            if (Login == null || Email == null || Password == null
-             || Login == ""   || Email == ""   || Password == ""
-             || Login == " "  || Email == " "  || Password == " ")
-            {
-                return false;
-            }
-            else if (Login.Length < 4)
-            {                
-                return false;
-            }
-            else if (Password.Length < 6)
-            {
-                return false;
-            }
-            else if (Password != Password2)
-            {
-                return false;
-            }
-            else if (Helper.GetContext().Users.FirstOrDefault(x => x.Login == Login || x.Email == Email) != null)
-            {
-                return false;
-            }
-            else if (!Email.Contains("@") || !Email.Contains("."))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
         private void CancelCommandImpl(Window window)
         {
             window.Close();

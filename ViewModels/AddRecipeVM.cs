@@ -67,36 +67,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
             
         }
 
-        public bool AddRecipeAcceptCommandImpl(string Title, string Description, string Ingredients, string CookingTime)
-        {
-            if (Title == null || Description == null || Ingredients == null || CookingTime == null
-             || Title == ""   || Description == ""   || Ingredients == ""   || CookingTime == ""
-             || Title == " "  || Description == " "  || Ingredients == " "  || CookingTime == " ")
-            {
-                return false;
-            }
-            else if (Title.Length > 30)
-            {
-                return false;
-            }
-            else if (Ingredients.Length > 200)
-            {
-                return false;
-            }
-            else if (CookingTime.Length > 15)
-            {
-                return false;
-            }
-            else if (Helper.GetContext().Recipes.FirstOrDefault(x => x.Title == Title) != null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
         private void CancelCommandImpl(Window window)
         {
             window.Close();

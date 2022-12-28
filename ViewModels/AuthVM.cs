@@ -47,19 +47,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Пользователь устранён", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
             }
         }
-
-        public bool SignInAcceptCommandImpl(string Login, string Password)
-        {
-            if((Login == "123" && Password == "456") || (Login == "321" && Password == "654"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         private async void SignUpCommandImpl(Window window)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();

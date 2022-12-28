@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 namespace Pelmenara_AUI_RUI.ViewModels
 {
     public class RecipeVM : ViewModelBase
-    {
-        private Recipe _recipe;
+    {        
         private FavoriteRecipe _favoriteRecipe = new FavoriteRecipe();
+        private Recipe _recipe;
 
         public ReactiveCommand<Window, Unit> ChangeRecipeCommand { get; }
         public ReactiveCommand<Window, Unit> DeleteRecipeCommand { get; }
@@ -57,7 +57,13 @@ namespace Pelmenara_AUI_RUI.ViewModels
         }
 
         private void AddFavoriteRecipeCommandImpl(RecipeWindow window)
-        {
+        {            
+            if (Helper.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == MainWindowViewModel.User.UserId && x.RecipeId == Recipe.RecipeId) != null)
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось добавить рецепт в избранное", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                return;
+            }
+
             FavoriteRecipe.UserId = MainWindowViewModel.User.UserId;
             FavoriteRecipe.RecipeId = Recipe.RecipeId;
             try
@@ -70,19 +76,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
                 MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось добавить рецепт в избранное", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
                 return;
             }
-        }
-
-        public bool AddFavoriteRecipeCommandImpl(int UserId, int RecipeId)
-        {
-            if(Helper.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == UserId && x.RecipeId == RecipeId) == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
         }
 
         public void SomeMethod(RecipeWindow window)

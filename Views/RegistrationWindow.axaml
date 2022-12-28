@@ -11,7 +11,8 @@
 		MinHeight="500" MinWidth="400"
 		MaxHeight="500" MaxWidth="400"
 		Background="#e6e6fa"
-		x:Name="Registration">
+		x:Name="Registration"
+		WindowStartupLocation="CenterOwner">
 
 	<Design.DataContext>
 		<vm:RegistrationVM/>

@@ -13,7 +13,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
 {
     public class FavoriteRecipeVM : ViewModelBase
     {
-        //private Recipe _recipe;
         private FavoriteRecipeWindow _favoriteRecipeWindow;
         private FavoriteRecipe _favoriteRecipe;        
         private ObservableCollection<FavoriteRecipe> _favoriteRecipes;
@@ -38,9 +37,6 @@ namespace Pelmenara_AUI_RUI.ViewModels
         private async void IfRecipeSelectedCommandImpl(Window window)
         {
             RecipeWindow recipeWindow = new RecipeWindow(_favoriteRecipe.Recipe);
-            //{
-            //    DataContext = new RecipeVM(_favoriteRecipe/*, window*/),
-            //};
             _favoriteRecipeWindow.listbox_FavoriteRecipes.SelectedIndex = -1;
             await recipeWindow.ShowDialog(window);
         }

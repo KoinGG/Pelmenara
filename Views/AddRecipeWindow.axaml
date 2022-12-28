@@ -12,7 +12,8 @@
 		MaxHeight="750" MaxWidth="550"
 		d:DesignHeight="750" d:DesignWidth="550"
 		Background="#e6e6fa"
-		x:Name="AddRecipe">
+		x:Name="AddRecipe"
+		WindowStartupLocation="CenterOwner">
 
 	<Design.DataContext>
 		<vm:AddRecipeVM/>

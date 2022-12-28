@@ -15,9 +15,9 @@
 		x:Name="thisWindow"
 		WindowStartupLocation="CenterScreen">
 
-    <!--<Design.DataContext>
+    <Design.DataContext>
         <vm:MainWindowViewModel/>
-    </Design.DataContext>-->
+    </Design.DataContext>
 
 	<Window.Styles>
 		<Style Selector="Button">
@@ -73,6 +73,7 @@
 
 			<TextBox				
 				x:Name="textBox_Search"
+				Text="{Binding SearchQuery}"
 				Watermark="НАЙТИ РЕЦЕПТ..."
 				Height="32"	Width="350"
 				HorizontalAlignment="Left"

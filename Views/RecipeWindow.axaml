@@ -11,11 +11,12 @@
 		MaxHeight="750" MaxWidth="650"
 		d:DesignHeight="750" d:DesignWidth="650"
 		Background="#e6e6fa"
-		x:Name="thisWindow">
+		x:Name="Recipe"
+		WindowStartupLocation="CenterOwner">
 
-	<!--<Design.DataContext>
+	<Design.DataContext>
 		<vm:RecipeVM/>
-	</Design.DataContext>-->
+	</Design.DataContext>
 
 	<Window.Styles>
 		<Style Selector="Label">
@@ -26,7 +27,7 @@
 		<Style Selector="Button.Recipe">
 			<Setter Property="Foreground" Value="#000000" />
 			<Setter Property="Background" Value="#7851a9" />
-			<Setter Property="CommandParameter" Value="{Binding ElementName=thisWindow}"/>
+			<Setter Property="CommandParameter" Value="{Binding ElementName=Recipe}"/>
 			<Setter Property="IsEnabled" Value="False"/>
 			<Setter Property="IsVisible" Value="False"/>
 			<Setter Property="Width" Value="85"/>

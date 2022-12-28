@@ -12,7 +12,8 @@
 		MaxHeight="750" MaxWidth="550"
 		d:DesignHeight="750" d:DesignWidth="550"
 		Background="#e6e6fa"
-		x:Name="ChangeRecipe">
+		x:Name="ChangeRecipe"
+		WindowStartupLocation="CenterOwner">
 
 	<Design.DataContext>
 		<vm:ChangeRecipeVM/>
