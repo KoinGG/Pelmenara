@@ -4,15 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
-		x:Class="Pelmenara_AUI_RUI.Views.AuthWindow"
+				x:Class="Pelmenara_AUI_RUI.Views.AuthWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Authorization"
-		Height="400" Width="400"
-		MinHeight="400" MinWidth="400"
-		MaxHeight="400" MaxWidth="400"
-		Background="#e6e6fa"
-		x:Name="Auth"
-		WindowStartupLocation="CenterOwner">
+        Title="Авторизация"
+				Height="400" Width="400"
+				MinHeight="400" MinWidth="400"
+				MaxHeight="400" MaxWidth="400"
+				Background="#e6e6fa"
+				x:Name="Auth"
+				WindowStartupLocation="CenterOwner">
 	
 	<Design.DataContext>
 		<vm:AuthVM/>

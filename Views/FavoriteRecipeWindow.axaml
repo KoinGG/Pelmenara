@@ -2,16 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+				xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
         mc:Ignorable="d" 
-		d:DesignWidth="550" d:DesignHeight="1080"
-		Width="550" Height="1080"
-		MaxWidth="550" MaxHeight="1080"
-		MinWidth="550" MinHeight="1080"
+				d:DesignWidth="550" d:DesignHeight="1080"
+				Width="550" Height="1080"
+				MaxWidth="550" MaxHeight="1080"
+				MinWidth="550" MinHeight="1080"
         x:Class="Pelmenara_AUI_RUI.Views.FavoriteRecipeWindow"
-        Title="FavoriteRecipeWindow"
-		WindowStartupLocation="CenterOwner"
-		Background="#e6e6fa">
+        Title="Избранные Рецепты"
+				WindowStartupLocation="CenterOwner"
+				Background="#e6e6fa">
 
 	<Design.DataContext>
 		<vm:FavoriteRecipeVM/>

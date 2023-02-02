@@ -4,15 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
-		x:Class="Pelmenara_AUI_RUI.Views.RegistrationWindow"
+				x:Class="Pelmenara_AUI_RUI.Views.RegistrationWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Registration"
-		Height="500" Width="400"
-		MinHeight="500" MinWidth="400"
-		MaxHeight="500" MaxWidth="400"
-		Background="#e6e6fa"
-		x:Name="Registration"
-		WindowStartupLocation="CenterOwner">
+        Title="Регистрация"
+				Height="500" Width="400"
+				MinHeight="500" MinWidth="400"
+				MaxHeight="500" MaxWidth="400"
+				Background="#e6e6fa"
+				x:Name="Registration"
+				WindowStartupLocation="CenterOwner">
 
 	<Design.DataContext>
 		<vm:RegistrationVM/>

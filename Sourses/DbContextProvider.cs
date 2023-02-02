@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pelmenara_AUI_RUI.Sourses
 {
-    public class Helper
+    public class DbContextProvider
     {
         private static PelmenaraContext _context;
 

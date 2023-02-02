@@ -14,7 +14,7 @@ namespace Pelmenara_AUI_RUI.Views
         public RecipeWindow(Recipe recipe) : this()
         {
             DataContext = new RecipeVM(recipe);
-            (DataContext as RecipeVM).SomeMethod(this);
+            (DataContext as RecipeVM).IfUserIsRecipeOwner();
         }
     }
 }

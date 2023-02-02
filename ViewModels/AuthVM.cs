@@ -1,70 +1,93 @@
 ﻿using Avalonia.Controls;
-using MessageBox.Avalonia;
+using Pelmenara_AUI_RUI.Sourses;
 using Pelmenara_AUI_RUI.Views;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
-using MessageBox.Avalonia.Enums;
-using Pelmenara_AUI_RUI.Sourses;
 
 namespace Pelmenara_AUI_RUI.ViewModels
 {
     public class AuthVM : ViewModelBase
     {
+        #region [Private Fields]
+
         private string _login;
         private string _password;
-        public ReactiveCommand<Window, Unit> SignInAcceptCommand { get; }
-        public ReactiveCommand<Window, Unit> SignUpCommand { get; }
 
-        public string Login
-        {
-            get { return _login; }
-            set 
-            {
-                this.RaiseAndSetIfChanged(ref _login, value);
-            }
-        }
-        public string Password
-        {
-            get { return _password; }
-            set { this.RaiseAndSetIfChanged(ref _password, value); }
-        }
-
-        private void SignInAcceptCommandImpl(Window window)
-        {
-            var user = Helper.GetContext().Users.FirstOrDefault(x => x.Login == Login && x.Password == Password);
-            if(user != null)
-            {
-                MainWindowViewModel.User = user;
-                window.Close();
-            }
-            else
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Пользователь устранён", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-            }
-        }
-        private async void SignUpCommandImpl(Window window)
-        {
-            RegistrationWindow registrationWindow = new RegistrationWindow();
-            try
-            {
-                await registrationWindow.ShowDialog(window).WaitAsync(TimeSpan.FromMinutes(60));
-            }
-            catch
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Время регистрации истекло", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                registrationWindow.Close();
-            }
-        }
+        #endregion
 
         public AuthVM()
         {
             SignInAcceptCommand = ReactiveCommand.Create<Window>(SignInAcceptCommandImpl);
             SignUpCommand = ReactiveCommand.Create<Window>(SignUpCommandImpl);
         }
+
+        #region [Properties]
+
+        public string Login
+        {
+            get
+            {
+                return _login;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _login, value);
+            }
+        }
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _password, value);
+            }
+        }
+
+        #region [Commands Declaration]
+
+        public ReactiveCommand<Window, Unit> SignInAcceptCommand { get; }
+        public ReactiveCommand<Window, Unit> SignUpCommand { get; }
+
+        #endregion
+
+        #endregion
+
+        #region [Methods]
+
+        private void SignInAcceptCommandImpl(Window window)
+        {
+            User? user = DbContextProvider.GetContext().Users.FirstOrDefault(x => x.Login == Login && x.Password == Password);
+
+            if(user != null)
+            {
+                MainWindowVM.CurrentUser = user;
+                window.Close();
+            }
+            else
+            {
+                ErrorMessage.ShowErrorMessage(window, "Пользователь устранён");
+            }
+        }
+        private async void SignUpCommandImpl(Window window)
+        {
+            var registrationWindow = new RegistrationWindow();
+
+            try
+            {
+                await registrationWindow.ShowDialog(window).WaitAsync(TimeSpan.FromMinutes(60));
+            }
+            catch
+            {
+                ErrorMessage.ShowErrorMessage(window, "Время регистрации истекло");
+                registrationWindow.Close();
+            }
+        }
+
+        #endregion
     }
 }

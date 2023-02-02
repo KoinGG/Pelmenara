@@ -3,20 +3,20 @@
         xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:sg="clr-namespace:AvaloniaSpacedGrid;assembly=AvaloniaSpacedGrid"
+				xmlns:sg="clr-namespace:AvaloniaSpacedGrid;assembly=AvaloniaSpacedGrid"
         mc:Ignorable="d" 
-		d:DesignWidth="550" d:DesignHeight="1080"
-		Width="550" Height="1080"
-		MinWidth="550" MinHeight="1080"
+				d:DesignWidth="550" d:DesignHeight="1080"
+				Width="550" Height="1080"
+				MinWidth="550" MinHeight="1080"
         x:Class="Pelmenara_AUI_RUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Pelmenara"
-		Background="#e6e6fa"
-		x:Name="thisWindow"
-		WindowStartupLocation="CenterScreen">
+        Title="{Binding Title}"
+				Background="#e6e6fa"
+				x:Name="thisWindow"
+				WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowVM/>
     </Design.DataContext>
 
 	<Window.Styles>
@@ -98,7 +98,8 @@
 				HorizontalContentAlignment="Center"
 				Width="62" Height="30"
 				x:Name="btn_SignIn"
-				IsEnabled="True" IsVisible="True"
+				IsEnabled="{Binding IsSignInButtonEnabled}" 
+        IsVisible="{Binding IsSignInButtonVisible}"
 				HorizontalAlignment="Center"
 				Margin="0,27,0,0"/>
 			
@@ -109,8 +110,9 @@
 			    HorizontalContentAlignment="Center"
 			    Width="62" Height="30"
 			    x:Name="btn_LogOut"
-			    IsEnabled="False" IsVisible="False"
-				HorizontalAlignment="Center"
+			    IsEnabled="{Binding IsLogOutButtonEnable}" 
+					IsVisible="{Binding IsLogOutButtonVisible}"
+					HorizontalAlignment="Center"
 			    Margin="0,27,0,0"/>
 		</StackPanel>
 		
@@ -178,6 +180,7 @@
 			<Button Classes="Recipe"
 				Command="{Binding AddRecipeCommand}" 
 				x:Name="btn_AddRecipe"
+				IsEnabled="{Binding IsAddRecipeButtonEnabled}"
 				Margin="0,50,0,0">				
 				<TextBlock TextAlignment="Center"> 
 					Добавить <LineBreak/> рецепт
@@ -187,6 +190,7 @@
 			<Button Classes="Recipe"
 				Content="Избранное"
 				Command="{Binding FavoriteRecipesCommand}"
+        IsEnabled="{Binding IsFavoriteRecipesButtonEnabled}"
 				x:Name="btn_FavoriteRecipes"
 				Margin="0,15,0,0"/>
 			

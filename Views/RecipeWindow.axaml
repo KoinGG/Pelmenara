@@ -2,17 +2,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+				xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
         mc:Ignorable="d"
         x:Class="Pelmenara_AUI_RUI.Views.RecipeWindow"
-        Title="RecipeWindow"
-		Height="750" Width="650"
-		MinHeight="750" MinWidth="650"
-		MaxHeight="750" MaxWidth="650"
-		d:DesignHeight="750" d:DesignWidth="650"
-		Background="#e6e6fa"
-		x:Name="Recipe"
-		WindowStartupLocation="CenterOwner">
+        Title="{Binding Title}"
+				Height="750" Width="650"
+				MinHeight="750" MinWidth="650"
+				MaxHeight="750" MaxWidth="650"
+				d:DesignHeight="750" d:DesignWidth="650"
+				Background="#e6e6fa"
+				x:Name="Recipe"
+				WindowStartupLocation="CenterOwner">
 
 	<Design.DataContext>
 		<vm:RecipeVM/>
@@ -28,8 +28,6 @@
 			<Setter Property="Foreground" Value="#000000" />
 			<Setter Property="Background" Value="#7851a9" />
 			<Setter Property="CommandParameter" Value="{Binding ElementName=Recipe}"/>
-			<Setter Property="IsEnabled" Value="False"/>
-			<Setter Property="IsVisible" Value="False"/>
 			<Setter Property="Width" Value="85"/>
 			<Setter Property="Height" Value="48"/>
 			<Setter Property="Cursor" Value="Arrow"/>
@@ -113,7 +111,8 @@
 
 			<Button Classes="Recipe"
 				Command="{Binding ChangeRecipeCommand}"
-				x:Name="btn_ChangeRecipe"
+        IsVisible="{Binding IsChangeAndDeleteButtonVisibleAndEnabled}"
+        IsEnabled="{Binding IsChangeAndDeleteButtonVisibleAndEnabled}"
 				Margin="0,15,0,0">
 				<TextBlock TextAlignment="Center">
 					Изменить <LineBreak/> рецепт
@@ -122,7 +121,8 @@
 
 			<Button Classes="Recipe"
 				Command="{Binding DeleteRecipeCommand}"
-				x:Name="btn_DeleteRecipe"
+				IsVisible="{Binding IsChangeAndDeleteButtonVisibleAndEnabled}"
+				IsEnabled="{Binding IsChangeAndDeleteButtonVisibleAndEnabled}"
 				Margin="0,15,0,0">
 				<TextBlock TextAlignment="Center">
 					Удалить <LineBreak/> рецепт
@@ -131,7 +131,8 @@
 
 			<Button Classes="Recipe"
 				Command="{Binding AddFavoriteRecipeCommand}"
-				x:Name="btn_AddFavoriteRecipe"
+        IsVisible="{Binding IsAddFavoriteRecipeButtonVisible}"
+        IsEnabled="{Binding IsAddFavoriteRecipeButtonEnabled}"
 				Width="95" Height="65"
 				Margin="0,15,0,0">
 				<TextBlock TextAlignment="Center">

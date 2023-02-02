@@ -1,55 +1,151 @@
-﻿using Avalonia.Controls;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.Enums;
+﻿
+using Avalonia.Controls;
 using Pelmenara_AUI_RUI.Sourses;
 using Pelmenara_AUI_RUI.Views;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Pelmenara_AUI_RUI.ViewModels
 {
     public class RecipeVM : ViewModelBase
-    {        
+    {
+        #region [Private Fields]
+
         private FavoriteRecipe _favoriteRecipe = new FavoriteRecipe();
         private Recipe _recipe;
+
+        private string _title;
+
+        private bool _isChangeAndDeleteButtonVisibleAndEnabled;
+        private bool _isAddFavoriteRecipeButtonVisible;
+        private bool _isAddFavoriteRecipeButtonEnabled;        
+
+        #endregion
+
+        public RecipeVM(Recipe recipe)
+        {
+            _recipe = recipe;
+            _title = $"{Recipe.Title}";
+
+            _isChangeAndDeleteButtonVisibleAndEnabled = false;
+            _isAddFavoriteRecipeButtonVisible = false;
+            _isAddFavoriteRecipeButtonEnabled = false;
+
+            ChangeRecipeCommand = ReactiveCommand.Create<Window>(ChangeRecipeCommandImpl);
+            DeleteRecipeCommand = ReactiveCommand.Create<Window>(DeleteRecipeCommandImpl);
+            AddFavoriteRecipeCommand = ReactiveCommand.Create<RecipeWindow>(AddFavoriteRecipeCommandImpl);
+        }
+
+        #region [Properties]
+
+        public Recipe Recipe
+        {
+            get
+            {
+                return _recipe;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _recipe, value);
+            }
+        }
+        public FavoriteRecipe FavoriteRecipe
+        {
+            get
+            {
+                return _favoriteRecipe;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _favoriteRecipe, value);
+            }
+        }
+
+        public string Title
+        {
+            get 
+            {
+                return _title;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _title, value);
+            }
+        }
+
+        public bool IsChangeAndDeleteButtonVisibleAndEnabled
+        {
+            get
+            {
+                return _isChangeAndDeleteButtonVisibleAndEnabled;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _isChangeAndDeleteButtonVisibleAndEnabled, value);
+            }
+        }        
+
+        public bool IsAddFavoriteRecipeButtonVisible
+        {
+            get
+            {
+                return _isAddFavoriteRecipeButtonVisible;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _isAddFavoriteRecipeButtonVisible, value);
+            }
+        }
+        public bool IsAddFavoriteRecipeButtonEnabled
+        {
+            get
+            {
+                return _isAddFavoriteRecipeButtonEnabled;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _isAddFavoriteRecipeButtonEnabled, value);
+            }
+        }
+
+        #region [Commands Declaration]
 
         public ReactiveCommand<Window, Unit> ChangeRecipeCommand { get; }
         public ReactiveCommand<Window, Unit> DeleteRecipeCommand { get; }
         public ReactiveCommand<RecipeWindow, Unit> AddFavoriteRecipeCommand { get; }
 
-        public Recipe Recipe
-        {
-            get { return _recipe; }
-            set { this.RaiseAndSetIfChanged(ref _recipe, value); }
-        }
-        public FavoriteRecipe FavoriteRecipe
-        {
-            get { return _favoriteRecipe; }
-            set { this.RaiseAndSetIfChanged(ref _favoriteRecipe, value); }
-        }
+        #endregion
+
+        #endregion
+
+        #region [Methods]
 
         private async void ChangeRecipeCommandImpl(Window window)
         {
-            ChangeRecipeWindow changeRecipeWindow = new ChangeRecipeWindow(_recipe);
-            await changeRecipeWindow.ShowDialog(window).WaitAsync(CancellationToken.None);
+            var changeRecipeWindow = new ChangeRecipeWindow(_recipe);
+
+            try
+            {
+                await changeRecipeWindow.ShowDialog(window).WaitAsync(CancellationToken.None);
+            }
+            catch
+            {
+                ErrorMessage.ShowErrorMessage(window, "Непредвиденная ошибка");
+            }
         }
 
         private void DeleteRecipeCommandImpl(Window window)
         {
             try
             {
-                Helper.GetContext().Recipes.Remove(Recipe);
-                Helper.GetContext().SaveChanges();
+                DbContextProvider.GetContext().Recipes.Remove(Recipe);
+                DbContextProvider.GetContext().SaveChanges();
             }            
             catch
             {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось удалить рецепт", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                ErrorMessage.ShowErrorMessage(window, "Не удалось удалить рецепт");
                 return;
             }
 
@@ -57,53 +153,54 @@ namespace Pelmenara_AUI_RUI.ViewModels
         }
 
         private void AddFavoriteRecipeCommandImpl(RecipeWindow window)
-        {            
-            if (Helper.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == MainWindowViewModel.User.UserId && x.RecipeId == Recipe.RecipeId) != null)
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось добавить рецепт в избранное", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                return;
-            }
+        {
+            AddFavoriteRecipeValidation(window);
 
-            FavoriteRecipe.UserId = MainWindowViewModel.User.UserId;
+            FavoriteRecipe.UserId = MainWindowVM.CurrentUser.UserId;
             FavoriteRecipe.RecipeId = Recipe.RecipeId;
+
             try
             {
-                Helper.GetContext().FavoriteRecipes.Add(FavoriteRecipe);
-                Helper.GetContext().SaveChanges();
+                DbContextProvider.GetContext().FavoriteRecipes.Add(FavoriteRecipe);
+                DbContextProvider.GetContext().SaveChanges();
             }
             catch
             {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось добавить рецепт в избранное", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                ErrorMessage.ShowErrorMessage(window, "Не удалось добавить рецепт в избранное");
                 return;
             }
         }
 
-        public void SomeMethod(RecipeWindow window)
+        public void IfUserIsRecipeOwner()
         {
-            if (Recipe.OwnerId == MainWindowViewModel.User.UserId)
+            if (Recipe.OwnerId == MainWindowVM.CurrentUser.UserId)
             {
-                window.btn_ChangeRecipe.IsVisible = true;
-                window.btn_ChangeRecipe.IsEnabled = true;
-
-                window.btn_DeleteRecipe.IsVisible = true;
-                window.btn_DeleteRecipe.IsEnabled = true;
+                IsChangeAndDeleteButtonVisibleAndEnabled = true;
             }
 
-            if (Helper.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == MainWindowViewModel.User.UserId && x.RecipeId == Recipe.RecipeId) == null)
+            var ifFavoriteRecipeIsExist = DbContextProvider.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == MainWindowVM.CurrentUser.UserId && x.RecipeId == Recipe.RecipeId);
+            // Если null значит не существует
+
+            if (ifFavoriteRecipeIsExist == null)
             {
-                window.btn_AddFavoriteRecipe.IsEnabled = true;
-            }            
+                IsAddFavoriteRecipeButtonEnabled = true;
+            }
 
-            window.btn_AddFavoriteRecipe.IsVisible = true;
+            IsAddFavoriteRecipeButtonVisible = true;
         }
 
-        public RecipeVM(Recipe recipe)
+        private void AddFavoriteRecipeValidation(Window window)
         {
-            _recipe = recipe;
+            var ifFavoriteRecipeIsExist = DbContextProvider.GetContext().FavoriteRecipes.FirstOrDefault(x => x.UserId == MainWindowVM.CurrentUser.UserId && x.RecipeId == Recipe.RecipeId);
+            // Если null значит не существует
 
-            ChangeRecipeCommand = ReactiveCommand.Create<Window>(ChangeRecipeCommandImpl);
-            DeleteRecipeCommand = ReactiveCommand.Create<Window>(DeleteRecipeCommandImpl);
-            AddFavoriteRecipeCommand = ReactiveCommand.Create<RecipeWindow>(AddFavoriteRecipeCommandImpl);
+            if (ifFavoriteRecipeIsExist != null)
+            {
+                ErrorMessage.ShowErrorMessage(window, "Не удалось добавить рецепт в избранное");
+                return;
+            }
         }
+
+        #endregion
     }
 }

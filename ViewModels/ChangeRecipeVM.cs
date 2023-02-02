@@ -1,61 +1,68 @@
-﻿using Avalonia.Controls;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.Enums;
+﻿
+using Avalonia.Controls;
 using Pelmenara_AUI_RUI.Sourses;
-using Pelmenara_AUI_RUI.Views;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pelmenara_AUI_RUI.ViewModels
 {
     public class ChangeRecipeVM : ViewModelBase
     {
+        #region [Private Fields]
+
+        private Recipe _editedRecipe = new Recipe();
+
+        #endregion
+
+        public ChangeRecipeVM(Recipe recipe)
+        {
+            EditedRecipe = recipe;
+
+            ChangeRecipeAcceptCommand = ReactiveCommand.Create<Window>(ChangeRecipeAcceptCommandImpl);
+            CancelCommand = ReactiveCommand.Create<Window>(CancelCommandImpl);
+        }
+
+        #region [Properties]
+
+        public Recipe EditedRecipe
+        {
+            get
+            {
+                return _editedRecipe;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _editedRecipe, value);
+            }
+        }
+
+        #region [Commands Declaration]
+
         public ReactiveCommand<Window, Unit> ChangeRecipeAcceptCommand { get; }
         public ReactiveCommand<Window, Unit> CancelCommand { get; }
 
-        private Recipe _recipe = new Recipe();
+        #endregion
+
+        #endregion
+
+        #region [Methods]
 
         private void ChangeRecipeAcceptCommandImpl(Window window)
         {
-            if (Recipe.Title == null || Recipe.Description == null || Recipe.Ingredients == null || Recipe.CookingTime == null
-             || Recipe.Title == ""   || Recipe.Description == ""   || Recipe.Ingredients == ""   || Recipe.CookingTime == ""
-             || Recipe.Title == " "  || Recipe.Description == " "  || Recipe.Ingredients == " "  || Recipe.CookingTime == " ")
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Поля не заполнены", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                return;
-            }
-            if (Recipe.Title.Length > 30)
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Длина заголовка не должна превышать 30 символов", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                return;
-            }
-            if (Recipe.Ingredients.Length > 200)
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Число символов в поле 'Игридиенты' превышает допустимое значение (200)  ", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                return;
-            }
-            if (Recipe.CookingTime.Length > 15)
-            {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Превышено допустимое количество символов для поля 'Время Готовки'", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
-                return;
-            }
+            ChangeRecipeValidation(window);
 
             try
             {
-                Recipe.CreationDate = DateTime.UtcNow;
-                Recipe.OwnerId = MainWindowViewModel.User.UserId;
-                Helper.GetContext().Recipes.Update(Recipe);
-                Helper.GetContext().SaveChanges();
+                EditedRecipe.CreationDate = DateTime.UtcNow;
+                EditedRecipe.OwnerId = MainWindowVM.CurrentUser.UserId;
+
+                DbContextProvider.GetContext().Recipes.Update(EditedRecipe);
+                DbContextProvider.GetContext().SaveChanges();
             }
             catch
             {
-                MessageBoxManager.GetMessageBoxStandardWindow("ОшибОчка", "Не удалось обновить рецепт", ButtonEnum.Ok, Icon.Warning).ShowDialog(window);
+                ErrorMessage.ShowErrorMessage(window, "Не удалось обновить рецепт");
                 return;
             }
 
@@ -67,18 +74,32 @@ namespace Pelmenara_AUI_RUI.ViewModels
             window.Close();
         }
 
-        public Recipe Recipe
+        private void ChangeRecipeValidation(Window window)
         {
-            get { return _recipe; }
-            set { this.RaiseAndSetIfChanged(ref _recipe, value); }
+            if (EditedRecipe.Title == null || EditedRecipe.Description == null || EditedRecipe.Ingredients == null || EditedRecipe.CookingTime == null
+             || EditedRecipe.Title == ""   || EditedRecipe.Description == ""   || EditedRecipe.Ingredients == ""   || EditedRecipe.CookingTime == ""
+             || EditedRecipe.Title == " "  || EditedRecipe.Description == " "  || EditedRecipe.Ingredients == " "  || EditedRecipe.CookingTime == " ")
+            {
+                ErrorMessage.ShowErrorMessage(window, "Поля не заполнены");
+                return;
+            }
+            if (EditedRecipe.Title.Length > 30)
+            {
+                ErrorMessage.ShowErrorMessage(window, "Длина заголовка не должна превышать 30 символов");
+                return;
+            }
+            if (EditedRecipe.Ingredients.Length > 200)
+            {
+                ErrorMessage.ShowErrorMessage(window, "Число символов в поле 'Ингредиенты' превышает допустимое значение (200) ");
+                return;
+            }
+            if (EditedRecipe.CookingTime.Length > 15)
+            {
+                ErrorMessage.ShowErrorMessage(window, "Превышено допустимое количество символов для поля 'Время Готовки'");
+                return;
+            }
         }
 
-        public ChangeRecipeVM(Recipe recipe)
-        {
-            Recipe = recipe;
-
-            ChangeRecipeAcceptCommand = ReactiveCommand.Create<Window>(ChangeRecipeAcceptCommandImpl);
-            CancelCommand = ReactiveCommand.Create<Window>(CancelCommandImpl);
-        }
+        #endregion
     }
 }

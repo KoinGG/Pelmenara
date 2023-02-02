@@ -2,18 +2,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
+				xmlns:vm="using:Pelmenara_AUI_RUI.ViewModels"
         mc:Ignorable="d"
         x:Class="Pelmenara_AUI_RUI.Views.ChangeRecipeWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ChangeRecipe"
-		Height="750" Width="400"
-		MinHeight="750" MinWidth="550"
-		MaxHeight="750" MaxWidth="550"
-		d:DesignHeight="750" d:DesignWidth="550"
-		Background="#e6e6fa"
-		x:Name="ChangeRecipe"
-		WindowStartupLocation="CenterOwner">
+        Title="Редактирование Рецепта"
+				Height="750" Width="400"
+				MinHeight="750" MinWidth="550"
+				MaxHeight="750" MaxWidth="550"
+				d:DesignHeight="750" d:DesignWidth="550"
+				Background="#e6e6fa"
+				x:Name="ChangeRecipe"
+				WindowStartupLocation="CenterOwner">
 
 	<Design.DataContext>
 		<vm:ChangeRecipeVM/>
@@ -69,16 +69,16 @@
 
 		<StackPanel Grid.Row="1">
 			<TextBox
-				x:Name="TitleBox" Text="{Binding Recipe.Title}"
+				x:Name="TitleBox" Text="{Binding EditedRecipe.Title}"
 				Watermark="Добавьте заголовок"
 				Margin="0,85,0,0"/>
 			<TextBox
-				x:Name="DescriptionBox" Text="{Binding Recipe.Description}"
+				x:Name="DescriptionBox" Text="{Binding EditedRecipe.Description}"
 				Watermark="Добавьте описание"
 				TextWrapping="Wrap" Height="100"
 				Margin="0,20,0,0"/>
 			<TextBox
-				x:Name="IngredientsBox" Text="{Binding Recipe.Ingredients}"
+				x:Name="IngredientsBox" Text="{Binding EditedRecipe.Ingredients}"
 				Watermark="Добавьте ингридиенты"
 				TextWrapping="Wrap" Height="100"
 				Margin="0,20,0,0"/>
@@ -87,7 +87,7 @@
 				Foreground="#919192"
 				Margin="137,20,0,0"/>
 			<TimePicker
-				SelectedTime="{Binding Recipe.CookingTime}"
+				SelectedTime="{Binding EditedRecipe.CookingTime}"
 				Margin="0,10,0,0"/>
 		</StackPanel>
 
